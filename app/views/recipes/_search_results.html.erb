@@ -1,0 +1,17 @@
+<% if recipes.any? %>
+  <ul role="list" class="divide-y divide-gray-200">
+    <% recipes.each do |recipe| %>
+      <li class="p-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-semibold text-gray-900"><%= link_to recipe.name, recipe_path(recipe), class: "hover:text-indigo-600" %></p>
+            <p class="text-xs text-gray-500"><%= recipe.description.present? ? truncate(recipe.description, length: 80) : "No description." %></p>
+          </div>
+          <span class="text-xs text-gray-500"><%= recipe.calories || 0 %> cal</span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="p-3 text-sm text-gray-500">No recipes found.</div>
+<% end %>

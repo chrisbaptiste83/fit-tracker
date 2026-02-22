@@ -1,0 +1,54 @@
+<%= form_with model: progress_log, local: true, class: "space-y-6" do |f| %>
+  <div class="form-control">
+    <%= f.label :date, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.date_field :date, class: "input input-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="form-control">
+      <%= f.label :weight, "Weight", class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :weight, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :body_fat_percentage, "Body fat %", class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :body_fat_percentage, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="form-control">
+      <%= f.label :chest, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :chest, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :waist, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :waist, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :hips, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :hips, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :arms, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :arms, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :thighs, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :thighs, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <%= f.label :notes, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_area :notes, rows: 3, class: "textarea textarea-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="form-control">
+    <%= f.label :photo, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.file_field :photo, class: "file-input file-input-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="flex items-center justify-end">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  category: MyString
+  muscle_group: MyString
+  equipment_needed: MyString
+  difficulty: MyString
+  calories_per_minute: 9.99
+  instructions: MyText
+
+two:
+  name: MyString
+  description: MyText
+  category: MyString
+  muscle_group: MyString
+  equipment_needed: MyString
+  difficulty: MyString
+  calories_per_minute: 9.99
+  instructions: MyText

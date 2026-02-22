@@ -1,0 +1,25 @@
+<% if foods.present? && foods.any? %>
+  <div class="space-y-3">
+    <% foods.each do |food| %>
+      <% name = food["name"] || food[:name] %>
+      <% quantity = food["quantity"] || food[:quantity] %>
+      <% unit = food["unit"] || food[:unit] %>
+      <% calories = food["estimated_calories"] || food[:estimated_calories] %>
+      <% protein = food["estimated_protein"] || food[:estimated_protein] %>
+      <% carbs = food["estimated_carbs"] || food[:estimated_carbs] %>
+      <% fat = food["estimated_fat"] || food[:estimated_fat] %>
+      <div class="rounded-lg border border-gray-200 p-4">
+        <div class="flex items-start justify-between">
+          <div>
+            <h3 class="text-sm font-semibold text-gray-900"><%= name.presence || "Food item" %></h3>
+            <p class="mt-1 text-xs text-gray-500"><%= [quantity, unit].compact.join(" ") %></p>
+          </div>
+          <div class="text-xs text-gray-500"><%= calories || "-" %> cal</div>
+        </div>
+        <div class="mt-2 text-xs text-gray-500">P: <%= protein || "-" %>g · C: <%= carbs || "-" %>g · F: <%= fat || "-" %>g</div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-sm text-gray-500">No foods parsed yet. Try describing a meal.</p>
+<% end %>

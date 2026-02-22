@@ -1,0 +1,11 @@
+<%= form_with url: ai_chat_path, method: :post, data: { turbo_stream: true }, class: "flex flex-col gap-3" do |f| %>
+  <%= f.hidden_field :context, value: conversation.context || "general" %>
+  <div>
+    <%= f.label :message, "Your message", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_area :message, rows: 3, placeholder: "Ask about workouts, nutrition, or progress...", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+  </div>
+  <div class="flex items-center justify-between">
+    <span class="text-xs text-gray-500">Context: <%= conversation.context.to_s.titleize %></span>
+    <%= f.submit "Send", class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+  </div>
+<% end %>

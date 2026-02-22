@@ -1,0 +1,12 @@
+<% analysis_text = analysis.is_a?(Hash) ? (analysis["analysis"] || analysis[:analysis]) : analysis %>
+<% generated_at = analysis.is_a?(Hash) ? (analysis["generated_at"] || analysis[:generated_at]) : nil %>
+<% if analysis_text.present? %>
+  <div class="space-y-2">
+    <p class="text-sm text-gray-700 whitespace-pre-line"><%= analysis_text %></p>
+    <% if generated_at.present? %>
+      <p class="text-xs text-gray-500">Generated at <%= generated_at.to_time.strftime("%b %d, %Y %H:%M") rescue generated_at %></p>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-sm text-gray-500">No analysis yet. Run a progress check to get insights.</p>
+<% end %>

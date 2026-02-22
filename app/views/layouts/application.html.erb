@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html class="h-full" data-theme="corporate">
+  <head>
+    <title><%= content_for(:title) || "FitTrack AI" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css">
+    <%= stylesheet_link_tag "fittrack", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="h-full fittrack-body">
+    <% if authenticated? %>
+      <div class="drawer lg:drawer-open">
+        <input id="fittrack-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+          <%= render "layouts/navigation" %>
+          <main class="fittrack-page px-4 pb-10 pt-6 sm:px-6 lg:px-10">
+            <div class="mx-auto max-w-7xl">
+              <% if notice.present? %>
+                <div class="fittrack-alert fittrack-alert-success alert mb-6">
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                  </svg>
+                  <span><%= notice %></span>
+                </div>
+              <% end %>
+
+              <% if alert.present? %>
+                <div class="fittrack-alert fittrack-alert-error alert mb-6">
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                  </svg>
+                  <span><%= alert %></span>
+                </div>
+              <% end %>
+
+              <%= yield %>
+            </div>
+          </main>
+        </div>
+        <div class="drawer-side">
+          <label for="fittrack-drawer" class="drawer-overlay"></label>
+          <%= render "layouts/sidebar" %>
+        </div>
+      </div>
+    <% else %>
+      <main class="fittrack-page px-4 pb-12 pt-8 sm:px-6 lg:px-10">
+        <div class="mx-auto max-w-5xl">
+          <% if notice.present? %>
+            <div class="fittrack-alert fittrack-alert-success alert mb-6">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+              </svg>
+              <span><%= notice %></span>
+            </div>
+          <% end %>
+
+          <% if alert.present? %>
+            <div class="fittrack-alert fittrack-alert-error alert mb-6">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+              </svg>
+              <span><%= alert %></span>
+            </div>
+          <% end %>
+
+          <%= yield %>
+        </div>
+      </main>
+    <% end %>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<div class="space-y-6">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Nutrition</h1>
+      <p class="text-sm text-gray-500">Overview for <%= @date.strftime("%B %d, %Y") %>.</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <%= link_to "Log Meal", new_meal_path(date: @date), class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+      <%= link_to "Food Database", foods_path, class: "rounded-md bg-white px-4 py-2 text-sm font-semibold text-indigo-600 shadow-sm ring-1 ring-inset ring-indigo-300 hover:bg-indigo-50" %>
+    </div>
+  </div>
+
+  <div class="rounded-lg bg-white p-4 shadow">
+    <%= form_with url: nutrition_path, method: :get, local: true, class: "flex flex-col gap-3 sm:flex-row sm:items-end" do |f| %>
+      <div>
+        <%= f.label :date, "View date", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.date_field :date, value: @date, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+      </div>
+      <%= f.submit "Go", class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+    <% end %>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <div class="rounded-lg bg-white p-4 shadow">
+      <p class="text-sm text-gray-500">Calories</p>
+      <p class="mt-1 text-2xl font-semibold text-gray-900"><%= @nutrition_totals[:calories] %></p>
+      <p class="mt-1 text-xs text-gray-500">Goal: <%= @calorie_goal %></p>
+    </div>
+    <div class="rounded-lg bg-white p-4 shadow">
+      <p class="text-sm text-gray-500">Protein</p>
+      <p class="mt-1 text-2xl font-semibold text-gray-900"><%= @nutrition_totals[:protein].round(1) %>g</p>
+      <p class="mt-1 text-xs text-gray-500">Goal: <%= @protein_goal %>g</p>
+    </div>
+    <div class="rounded-lg bg-white p-4 shadow">
+      <p class="text-sm text-gray-500">Carbs</p>
+      <p class="mt-1 text-2xl font-semibold text-gray-900"><%= @nutrition_totals[:carbs].round(1) %>g</p>
+      <p class="mt-1 text-xs text-gray-500">Goal: <%= @carb_goal %>g</p>
+    </div>
+    <div class="rounded-lg bg-white p-4 shadow">
+      <p class="text-sm text-gray-500">Fat</p>
+      <p class="mt-1 text-2xl font-semibold text-gray-900"><%= @nutrition_totals[:fat].round(1) %>g</p>
+      <p class="mt-1 text-xs text-gray-500">Goal: <%= @fat_goal %>g</p>
+    </div>
+  </div>
+
+  <div class="rounded-lg bg-white shadow">
+    <div class="border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+      <h2 class="text-sm font-semibold text-gray-900">Meals</h2>
+      <%= link_to "View all", meals_path(date: @date), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+    </div>
+    <% if @meals.any? %>
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @meals.each do |meal| %>
+          <li class="p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-semibold text-gray-900"><%= link_to meal.meal_type.titleize, meal_path(meal), class: "hover:text-indigo-600" %></p>
+                <p class="mt-1 text-xs text-gray-500"><%= meal.meal_foods.count %> items · <%= meal.total_calories %> cal</p>
+              </div>
+              <%= link_to "Edit", edit_meal_path(meal), class: "text-xs font-medium text-gray-500 hover:text-gray-700" %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="p-6 text-sm text-gray-500">No meals logged for this date.</div>
+    <% end %>
+  </div>
+
+  <div class="rounded-lg bg-white p-4 shadow">
+    <h2 class="text-sm font-semibold text-gray-900">Weekly Calories</h2>
+    <div class="mt-4 grid grid-cols-7 gap-2">
+      <% @weekly_calories.each do |day, calories| %>
+        <div class="text-center">
+          <div class="rounded bg-gray-100 px-2 py-3 text-sm font-semibold text-gray-900"><%= calories %></div>
+          <div class="mt-1 text-xs text-gray-500"><%= day %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

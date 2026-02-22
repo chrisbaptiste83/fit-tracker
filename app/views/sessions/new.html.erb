@@ -1,0 +1,48 @@
+<div class="mx-auto grid min-h-[80vh] max-w-5xl items-center gap-10 lg:grid-cols-2">
+  <div class="space-y-6">
+    <div class="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 shadow">
+      <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+      Daily momentum
+    </div>
+    <h1 class="fittrack-display text-4xl text-slate-900 sm:text-5xl">Sign in to your FitTrack AI hub</h1>
+    <p class="text-base text-slate-600">Plan workouts, track nutrition, and let the AI coach translate your data into next steps.</p>
+    <div class="flex items-center gap-3 text-sm text-slate-500">
+      <span class="inline-flex items-center gap-2">
+        <span class="h-2 w-2 rounded-full bg-amber-400"></span>
+        Smart training cycles
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="h-2 w-2 rounded-full bg-sky-400"></span>
+        Recovery-first insights
+      </span>
+    </div>
+  </div>
+
+  <div class="fittrack-auth-card rounded-3xl p-8">
+    <div class="mb-6">
+      <h2 class="text-2xl font-semibold text-slate-900">Welcome back</h2>
+      <p class="text-sm text-slate-500">
+        Need an account?
+        <%= link_to "Create one", new_registration_path, class: "font-semibold text-slate-900 underline decoration-amber-400 decoration-2 underline-offset-4" %>
+      </p>
+    </div>
+    <%= form_with url: session_path, class: "space-y-5" do |f| %>
+      <div class="form-control">
+        <%= f.label :email_address, "Email address", class: "label text-sm font-semibold text-slate-700" %>
+        <%= f.email_field :email_address, required: true, autofocus: true, autocomplete: "email", class: "fittrack-input input input-bordered w-full" %>
+      </div>
+
+      <div class="form-control">
+        <div class="flex items-center justify-between">
+          <%= f.label :password, class: "label text-sm font-semibold text-slate-700" %>
+          <%= link_to "Forgot password?", new_password_path, class: "text-xs font-semibold text-slate-500 hover:text-slate-700" %>
+        </div>
+        <%= f.password_field :password, required: true, autocomplete: "current-password", class: "fittrack-input input input-bordered w-full" %>
+      </div>
+
+      <div>
+        <%= f.submit "Sign in", class: "btn btn-primary w-full" %>
+      </div>
+    <% end %>
+  </div>
+</div>

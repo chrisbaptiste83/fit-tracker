@@ -1,0 +1,61 @@
+<div class="space-y-6">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900"><%= @food.name %></h1>
+      <p class="mt-1 text-sm text-gray-500"><%= [@food.brand.presence, "#{@food.serving_size} #{@food.serving_unit}".strip.presence].compact.join(" · ") %></p>
+    </div>
+    <div class="flex items-center gap-2">
+      <%= link_to "Add Meal", new_meal_path, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+      <%= link_to "Back", foods_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div class="lg:col-span-2 space-y-4">
+      <div class="rounded-lg bg-white p-4 shadow">
+        <h2 class="text-sm font-semibold text-gray-900">Nutrition</h2>
+        <dl class="mt-3 grid grid-cols-1 gap-2 text-sm text-gray-700 sm:grid-cols-2">
+          <div class="flex items-center justify-between"><dt>Calories</dt><dd><%= @food.calories %></dd></div>
+          <div class="flex items-center justify-between"><dt>Protein</dt><dd><%= @food.protein.to_f.round(1) %>g</dd></div>
+          <div class="flex items-center justify-between"><dt>Carbs</dt><dd><%= @food.carbs.to_f.round(1) %>g</dd></div>
+          <div class="flex items-center justify-between"><dt>Fat</dt><dd><%= @food.fat.to_f.round(1) %>g</dd></div>
+          <div class="flex items-center justify-between"><dt>Fiber</dt><dd><%= @food.fiber.to_f.round(1) %>g</dd></div>
+        </dl>
+      </div>
+
+      <% if @food.meals.any? %>
+        <div class="rounded-lg bg-white p-4 shadow">
+          <h2 class="text-sm font-semibold text-gray-900">Recent Meals</h2>
+          <ul role="list" class="mt-3 divide-y divide-gray-200">
+            <% @food.meals.order(date: :desc).limit(5).each do |meal| %>
+              <li class="py-2">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900"><%= link_to meal.meal_type.titleize, meal_path(meal), class: "hover:text-indigo-600" %></p>
+                    <p class="text-xs text-gray-500"><%= meal.date.strftime("%b %d, %Y") %></p>
+                  </div>
+                  <span class="text-xs text-gray-500"><%= meal.total_calories %> cal</span>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="space-y-4">
+      <div class="rounded-lg bg-white p-4 shadow">
+        <h2 class="text-sm font-semibold text-gray-900">Serving</h2>
+        <p class="mt-2 text-sm text-gray-600">Default serving size for quick logging.</p>
+        <p class="mt-3 text-lg font-semibold text-gray-900"><%= @food.serving_size %> <%= @food.serving_unit %></p>
+      </div>
+
+      <% if @food.barcode.present? %>
+        <div class="rounded-lg bg-white p-4 shadow">
+          <h2 class="text-sm font-semibold text-gray-900">Barcode</h2>
+          <p class="mt-2 text-sm text-gray-600"><%= @food.barcode %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

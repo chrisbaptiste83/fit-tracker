@@ -1,0 +1,17 @@
+<%= form_with model: meal, local: true, class: "space-y-6" do |f| %>
+  <div class="form-control">
+    <%= f.label :meal_type, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.select :meal_type, options_for_select(Meal.meal_types.keys.map { |m| [m.titleize, m] }, meal.meal_type), {}, class: "select select-bordered w-full bg-white/80" %>
+  </div>
+  <div class="form-control">
+    <%= f.label :date, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.date_field :date, class: "input input-bordered w-full bg-white/80" %>
+  </div>
+  <div class="form-control">
+    <%= f.label :notes, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_area :notes, rows: 3, class: "textarea textarea-bordered w-full bg-white/80" %>
+  </div>
+  <div class="flex items-center justify-end">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

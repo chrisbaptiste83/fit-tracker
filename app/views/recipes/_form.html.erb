@@ -1,0 +1,63 @@
+<%= form_with model: recipe, local: true, class: "space-y-6" do |f| %>
+  <div class="form-control">
+    <%= f.label :name, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_field :name, required: true, class: "input input-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="form-control">
+    <%= f.label :description, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_area :description, rows: 3, class: "textarea textarea-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="form-control">
+    <%= f.label :instructions, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_area :instructions, rows: 6, class: "textarea textarea-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="form-control">
+      <%= f.label :prep_time, "Prep time (min)", class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :prep_time, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :cook_time, "Cook time (min)", class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :cook_time, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :servings, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :servings, min: 1, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-4">
+    <div class="form-control">
+      <%= f.label :calories, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :calories, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :protein, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :protein, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :carbs, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :carbs, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :fat, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :fat, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <%= f.label :image_url, "Image URL", class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.url_field :image_url, class: "input input-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <label class="flex items-center gap-2 text-sm font-semibold text-slate-600">
+      <%= f.check_box :ai_generated, class: "checkbox checkbox-primary" %>
+      AI generated
+    </label>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

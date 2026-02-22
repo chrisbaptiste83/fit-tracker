@@ -1,0 +1,41 @@
+<div class="mx-auto grid min-h-[70vh] max-w-5xl items-center gap-10 lg:grid-cols-2">
+  <div class="space-y-6">
+    <div class="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 shadow">
+      <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+      Account recovery
+    </div>
+    <h1 class="fittrack-display text-4xl text-slate-900 sm:text-5xl">Create a new password</h1>
+    <p class="text-base text-slate-600">Choose a strong password you do not use elsewhere.</p>
+    <p class="text-sm text-slate-500">Use at least 8 characters for better account security.</p>
+  </div>
+
+  <div class="fittrack-auth-card rounded-3xl p-8">
+    <% if alert = flash[:alert] %>
+      <div class="fittrack-alert fittrack-alert-error alert mb-6" id="alert">
+        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+        </svg>
+        <span><%= alert %></span>
+      </div>
+    <% end %>
+
+    <h2 class="text-2xl font-semibold text-slate-900">Update password</h2>
+    <p class="mt-1 text-sm text-slate-500">This link can be used once and expires for security.</p>
+
+    <%= form_with url: password_path(params[:token]), method: :put, class: "mt-6 space-y-5" do |form| %>
+      <div class="form-control">
+        <%= form.label :password, "New password", class: "label text-sm font-semibold text-slate-700" %>
+        <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Enter new password", maxlength: 72, class: "fittrack-input input input-bordered w-full" %>
+      </div>
+
+      <div class="form-control">
+        <%= form.label :password_confirmation, "Confirm password", class: "label text-sm font-semibold text-slate-700" %>
+        <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Repeat new password", maxlength: 72, class: "fittrack-input input input-bordered w-full" %>
+      </div>
+
+      <div>
+        <%= form.submit "Save new password", class: "btn btn-primary w-full" %>
+      </div>
+    <% end %>
+  </div>
+</div>

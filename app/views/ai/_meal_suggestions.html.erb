@@ -1,0 +1,28 @@
+<% if suggestions.present? && suggestions.any? %>
+  <div class="space-y-3">
+    <% suggestions.each do |suggestion| %>
+      <% name = suggestion["name"] || suggestion[:name] %>
+      <% description = suggestion["description"] || suggestion[:description] %>
+      <% calories = suggestion["calories"] || suggestion[:calories] || suggestion["estimated_calories"] || suggestion[:estimated_calories] %>
+      <% protein = suggestion["protein"] || suggestion[:protein] || suggestion["estimated_protein"] || suggestion[:estimated_protein] %>
+      <% carbs = suggestion["carbs"] || suggestion[:carbs] || suggestion["estimated_carbs"] || suggestion[:estimated_carbs] %>
+      <% fat = suggestion["fat"] || suggestion[:fat] || suggestion["estimated_fat"] || suggestion[:estimated_fat] %>
+      <% steps = suggestion["recipe"] || suggestion[:recipe] || suggestion["steps"] || suggestion[:steps] %>
+      <div class="rounded-lg border border-gray-200 p-4">
+        <div class="flex items-start justify-between">
+          <div>
+            <h3 class="text-sm font-semibold text-gray-900"><%= name.presence || "Meal suggestion" %></h3>
+            <p class="mt-1 text-sm text-gray-600"><%= description.presence || "Balanced option tailored to your goals." %></p>
+          </div>
+          <div class="text-xs text-gray-500"><%= calories || "-" %> cal</div>
+        </div>
+        <div class="mt-2 text-xs text-gray-500">P: <%= protein || "-" %>g · C: <%= carbs || "-" %>g · F: <%= fat || "-" %>g</div>
+        <% if steps.present? %>
+          <p class="mt-3 text-xs text-gray-600"><%= steps.is_a?(Array) ? steps.join(" ") : steps.to_s %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-sm text-gray-500">No suggestions yet. Submit the form to get meal ideas.</p>
+<% end %>

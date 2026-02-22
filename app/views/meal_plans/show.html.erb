@@ -1,0 +1,46 @@
+<div class="space-y-6">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900"><%= @meal_plan.date_range %></h1>
+      <p class="text-sm text-gray-500"><%= @meal_plan.ai_generated? ? "AI generated" : "Manual" %></p>
+    </div>
+    <div class="flex items-center gap-2">
+      <%= link_to "Edit", edit_meal_plan_path(@meal_plan), class: "rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+      <%= button_to "Delete", meal_plan_path(@meal_plan), method: :delete, data: { turbo_confirm: "Delete this meal plan?" }, class: "rounded-md bg-white px-3 py-2 text-sm font-semibold text-red-600 shadow-sm ring-1 ring-inset ring-red-200 hover:bg-red-50" %>
+      <%= link_to "Back", meal_plans_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+    </div>
+  </div>
+
+  <div class="rounded-lg bg-white shadow">
+    <div class="border-b border-gray-200 px-4 py-3">
+      <h2 class="text-sm font-semibold text-gray-900">Daily Plan</h2>
+    </div>
+    <div class="divide-y divide-gray-200">
+      <% @meal_plan_days.each do |day| %>
+        <div class="p-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-semibold text-gray-900"><%= day.day_name %></h3>
+            <span class="text-xs text-gray-500"><%= day.total_calories || 0 %> cal</span>
+          </div>
+          <div class="mt-3 grid grid-cols-1 gap-2 md:grid-cols-3">
+            <div class="rounded border border-gray-100 p-3">
+              <div class="text-xs font-medium text-gray-500">Breakfast</div>
+              <div class="mt-1 text-sm text-gray-900"><%= day.breakfast_recipe&.name || "-" %></div>
+            </div>
+            <div class="rounded border border-gray-100 p-3">
+              <div class="text-xs font-medium text-gray-500">Lunch</div>
+              <div class="mt-1 text-sm text-gray-900"><%= day.lunch_recipe&.name || "-" %></div>
+            </div>
+            <div class="rounded border border-gray-100 p-3">
+              <div class="text-xs font-medium text-gray-500">Dinner</div>
+              <div class="mt-1 text-sm text-gray-900"><%= day.dinner_recipe&.name || "-" %></div>
+            </div>
+          </div>
+          <% if day.snacks.present? %>
+            <div class="mt-3 text-sm text-gray-700">Snacks: <%= day.snacks %></div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

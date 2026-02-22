@@ -1,0 +1,67 @@
+<div class="space-y-6">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Profile</p>
+      <h1 class="fittrack-display text-3xl text-slate-900">Edit profile</h1>
+      <p class="text-sm text-slate-500">Update your fitness profile and goals.</p>
+    </div>
+    <%= link_to "Back", profile_path, class: "btn btn-ghost" %>
+  </div>
+
+  <div class="fittrack-surface rounded-3xl p-6">
+    <%= form_with model: @user, url: profile_path, local: true, class: "space-y-6" do |f| %>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div class="form-control">
+          <%= f.label :height, "Height (cm)", class: "label text-sm font-semibold text-slate-700" %>
+          <%= f.number_field :height, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+        </div>
+        <div class="form-control">
+          <%= f.label :weight, "Weight (kg)", class: "label text-sm font-semibold text-slate-700" %>
+          <%= f.number_field :weight, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+        </div>
+        <div class="form-control">
+          <%= f.label :age, class: "label text-sm font-semibold text-slate-700" %>
+          <%= f.number_field :age, min: 0, class: "input input-bordered w-full bg-white/80" %>
+        </div>
+        <div class="form-control">
+          <%= f.label :gender, class: "label text-sm font-semibold text-slate-700" %>
+          <%= f.select :gender, options_for_select(User.genders.keys.map { |g| [g.titleize, g] }, @user.gender), { include_blank: true }, class: "select select-bordered w-full bg-white/80" %>
+        </div>
+        <div class="form-control">
+          <%= f.label :fitness_goal, class: "label text-sm font-semibold text-slate-700" %>
+          <%= f.select :fitness_goal, options_for_select(User.fitness_goals.keys.map { |g| [g.titleize, g] }, @user.fitness_goal), { include_blank: true }, class: "select select-bordered w-full bg-white/80" %>
+        </div>
+        <div class="form-control">
+          <%= f.label :activity_level, class: "label text-sm font-semibold text-slate-700" %>
+          <%= f.select :activity_level, options_for_select(User.activity_levels.keys.map { |a| [a.titleize, a] }, @user.activity_level), { include_blank: true }, class: "select select-bordered w-full bg-white/80" %>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-200/60 pt-6">
+        <h2 class="text-sm font-semibold text-slate-900">Nutrition goals</h2>
+        <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-4">
+          <div class="form-control">
+            <%= f.label :daily_calorie_goal, class: "label text-sm font-semibold text-slate-700" %>
+            <%= f.number_field :daily_calorie_goal, min: 0, class: "input input-bordered w-full bg-white/80" %>
+          </div>
+          <div class="form-control">
+            <%= f.label :protein_goal, class: "label text-sm font-semibold text-slate-700" %>
+            <%= f.number_field :protein_goal, min: 0, class: "input input-bordered w-full bg-white/80" %>
+          </div>
+          <div class="form-control">
+            <%= f.label :carb_goal, class: "label text-sm font-semibold text-slate-700" %>
+            <%= f.number_field :carb_goal, min: 0, class: "input input-bordered w-full bg-white/80" %>
+          </div>
+          <div class="form-control">
+            <%= f.label :fat_goal, class: "label text-sm font-semibold text-slate-700" %>
+            <%= f.number_field :fat_goal, min: 0, class: "input input-bordered w-full bg-white/80" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end">
+        <%= f.submit "Save", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Edit Meal</h1>
+      <p class="text-sm text-gray-500">Update meal details.</p>
+    </div>
+    <%= link_to "Back", meal_path(@meal), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+  </div>
+
+  <div class="rounded-lg bg-white p-6 shadow">
+    <%= render "form", meal: @meal %>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<%= form_with model: food, local: true, class: "space-y-6" do |f| %>
+  <div class="form-control">
+    <%= f.label :name, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_field :name, required: true, class: "input input-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="form-control">
+    <%= f.label :brand, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_field :brand, class: "input input-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="form-control">
+      <%= f.label :serving_size, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :serving_size, step: 0.1, min: 0, required: true, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :serving_unit, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.text_field :serving_unit, placeholder: "g, oz, cup", class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :calories, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :calories, min: 0, required: true, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-4">
+    <div class="form-control">
+      <%= f.label :protein, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :protein, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :carbs, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :carbs, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :fat, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :fat, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :fiber, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :fiber, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <%= f.label :barcode, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_field :barcode, class: "input input-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="flex items-center justify-end">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

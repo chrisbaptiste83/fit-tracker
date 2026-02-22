@@ -1,0 +1,7 @@
+<%= turbo_stream.append "chat_messages" do %>
+  <%= render partial: "ai/assistant/chat_message", collection: @conversation.messages.last(2), as: :message %>
+<% end %>
+
+<%= turbo_stream.replace "chat_form" do %>
+  <%= render "ai/assistant/chat_form", conversation: @conversation %>
+<% end %>

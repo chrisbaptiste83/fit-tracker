@@ -1,0 +1,129 @@
+<div class="space-y-6">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">AI Assistant</h1>
+      <p class="text-sm text-gray-500">Get personalized coaching, meal ideas, and progress insights.</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <%= link_to "Workouts", workouts_path, class: "rounded-md bg-white px-4 py-2 text-sm font-semibold text-indigo-600 shadow-sm ring-1 ring-inset ring-indigo-300 hover:bg-indigo-50" %>
+      <%= link_to "Nutrition", nutrition_path, class: "rounded-md bg-white px-4 py-2 text-sm font-semibold text-indigo-600 shadow-sm ring-1 ring-inset ring-indigo-300 hover:bg-indigo-50" %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <div class="space-y-6">
+      <div class="rounded-lg bg-white shadow">
+        <div class="border-b border-gray-200 px-4 py-3">
+          <h2 class="text-sm font-semibold text-gray-900">Chat Coach</h2>
+        </div>
+        <div class="p-4 space-y-4">
+          <div id="chat_messages" class="space-y-3 max-h-96 overflow-auto">
+            <% if @conversation.messages.present? %>
+              <%= render partial: "ai/assistant/chat_message", collection: @conversation.messages, as: :message %>
+            <% else %>
+              <p class="text-sm text-gray-500">Ask FitTrack AI anything about training, nutrition, or your goals.</p>
+            <% end %>
+          </div>
+          <div id="chat_form">
+            <%= render "ai/assistant/chat_form", conversation: @conversation %>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-lg bg-white shadow">
+        <div class="border-b border-gray-200 px-4 py-3">
+          <h2 class="text-sm font-semibold text-gray-900">Progress Analysis</h2>
+        </div>
+        <div class="p-4 space-y-3">
+          <%= form_with url: ai_analyze_progress_path, method: :post, data: { turbo_stream: true }, class: "flex flex-col gap-3" do |f| %>
+            <div>
+              <%= f.label :days, "Lookback window (days)", class: "block text-sm font-medium text-gray-700" %>
+              <%= f.number_field :days, value: 30, min: 7, max: 180, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+            </div>
+            <%= f.submit "Analyze Progress", class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+          <% end %>
+          <div id="progress_analysis" class="rounded-lg border border-dashed border-gray-200 p-3">
+            <%= render "ai/progress_analysis", analysis: nil %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <div class="rounded-lg bg-white shadow">
+        <div class="border-b border-gray-200 px-4 py-3">
+          <h2 class="text-sm font-semibold text-gray-900">Generate Workout</h2>
+        </div>
+        <div class="p-4">
+          <%= form_with url: ai_generate_workout_path, method: :post, local: true, class: "space-y-4" do |f| %>
+            <div>
+              <%= f.label :focus, "Focus", class: "block text-sm font-medium text-gray-700" %>
+              <%= f.text_field :focus, placeholder: "Strength, cardio, mobility...", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+            </div>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div>
+                <%= f.label :duration, "Duration (min)", class: "block text-sm font-medium text-gray-700" %>
+                <%= f.number_field :duration, value: 45, min: 10, max: 120, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+              </div>
+              <div>
+                <%= f.label :difficulty, "Difficulty", class: "block text-sm font-medium text-gray-700" %>
+                <%= f.select :difficulty, options_for_select(["beginner", "intermediate", "advanced"], "intermediate"), {}, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+              </div>
+              <div>
+                <%= f.label :equipment, "Equipment", class: "block text-sm font-medium text-gray-700" %>
+                <%= f.text_field :equipment, placeholder: "Dumbbells, band", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+              </div>
+            </div>
+            <%= f.submit "Create Workout", class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="rounded-lg bg-white shadow">
+        <div class="border-b border-gray-200 px-4 py-3">
+          <h2 class="text-sm font-semibold text-gray-900">Meal Suggestions</h2>
+        </div>
+        <div class="p-4 space-y-3">
+          <%= form_with url: ai_suggest_meals_path, method: :post, data: { turbo_stream: true }, class: "space-y-4" do |f| %>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <%= f.label :meal_type, "Meal type", class: "block text-sm font-medium text-gray-700" %>
+                <%= f.select :meal_type, options_for_select(["breakfast", "lunch", "dinner", "snack"], "lunch"), {}, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+              </div>
+              <div>
+                <%= f.label :calories_remaining, "Calories remaining", class: "block text-sm font-medium text-gray-700" %>
+                <%= f.number_field :calories_remaining, value: 600, min: 0, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+              </div>
+            </div>
+            <div>
+              <%= f.label :preferences, "Preferences", class: "block text-sm font-medium text-gray-700" %>
+              <%= f.text_field :preferences, placeholder: "High protein, vegetarian...", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+            </div>
+            <%= f.submit "Get Suggestions", class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+          <% end %>
+          <div id="meal_suggestions" class="rounded-lg border border-dashed border-gray-200 p-3">
+            <%= render "ai/meal_suggestions", suggestions: [] %>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-lg bg-white shadow">
+        <div class="border-b border-gray-200 px-4 py-3">
+          <h2 class="text-sm font-semibold text-gray-900">Parse Food Log</h2>
+        </div>
+        <div class="p-4 space-y-3">
+          <%= form_with url: ai_parse_food_path, method: :post, data: { turbo_stream: true }, class: "space-y-4" do |f| %>
+            <div>
+              <%= f.label :text, "Describe what you ate", class: "block text-sm font-medium text-gray-700" %>
+              <%= f.text_area :text, rows: 3, placeholder: "2 eggs, toast with peanut butter, black coffee", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+            </div>
+            <%= f.submit "Parse", class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+          <% end %>
+          <div id="parsed_foods" class="rounded-lg border border-dashed border-gray-200 p-3">
+            <%= render "ai/parsed_foods", foods: [] %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

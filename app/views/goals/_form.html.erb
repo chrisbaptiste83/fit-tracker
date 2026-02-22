@@ -1,0 +1,41 @@
+<%= form_with model: goal, local: true, class: "space-y-6" do |f| %>
+  <div class="form-control">
+    <%= f.label :goal_type, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.select :goal_type, options_for_select(Goal.goal_types.keys.map { |g| [g.titleize, g] }, goal.goal_type), {}, class: "select select-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="form-control">
+    <%= f.label :description, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_field :description, required: true, class: "input input-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="form-control">
+      <%= f.label :target_value, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :target_value, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :current_value, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :current_value, step: 0.1, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :unit, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.text_field :unit, placeholder: "lbs, kg, days", class: "input input-bordered w-full bg-white/80" %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div class="form-control">
+      <%= f.label :start_date, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.date_field :start_date, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :target_date, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.date_field :target_date, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-end">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

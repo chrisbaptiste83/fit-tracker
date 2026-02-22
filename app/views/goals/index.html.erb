@@ -1,0 +1,58 @@
+<div class="space-y-6">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Goals</h1>
+      <p class="text-sm text-gray-500">Track what you are working toward.</p>
+    </div>
+    <%= link_to "New Goal", new_goal_path, class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <div class="rounded-lg bg-white shadow">
+      <div class="border-b border-gray-200 px-4 py-3">
+        <h2 class="text-sm font-semibold text-gray-900">Active</h2>
+      </div>
+      <% if @active_goals.any? %>
+        <ul role="list" class="divide-y divide-gray-200">
+          <% @active_goals.each do |goal| %>
+            <li class="p-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-sm font-semibold text-gray-900"><%= link_to goal.description, goal_path(goal), class: "hover:text-indigo-600" %></p>
+                  <p class="mt-1 text-xs text-gray-500"><%= goal.goal_type.titleize %> · <%= goal.current_value || 0 %>/<%= goal.target_value %> <%= goal.unit %></p>
+                </div>
+                <span class="text-xs font-medium <%= goal.on_track? ? 'text-green-600' : 'text-orange-600' %>"><%= goal.progress_percentage %>%</span>
+              </div>
+              <div class="mt-2">
+                <div class="h-2 w-full rounded-full bg-gray-200">
+                  <div class="h-2 rounded-full <%= goal.on_track? ? 'bg-green-600' : 'bg-orange-500' %>" style="width: <%= goal.progress_percentage %>%"></div>
+                </div>
+                <p class="mt-1 text-xs text-gray-500"><%= goal.days_remaining %> days remaining</p>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="p-6 text-sm text-gray-500">No active goals.</div>
+      <% end %>
+    </div>
+
+    <div class="rounded-lg bg-white shadow">
+      <div class="border-b border-gray-200 px-4 py-3">
+        <h2 class="text-sm font-semibold text-gray-900">Completed</h2>
+      </div>
+      <% if @completed_goals.any? %>
+        <ul role="list" class="divide-y divide-gray-200">
+          <% @completed_goals.each do |goal| %>
+            <li class="p-4">
+              <p class="text-sm font-semibold text-gray-900"><%= link_to goal.description, goal_path(goal), class: "hover:text-indigo-600" %></p>
+              <p class="mt-1 text-xs text-gray-500">Completed on <%= goal.completed_at&.to_date&.strftime("%b %d, %Y") %></p>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="p-6 text-sm text-gray-500">No completed goals yet.</div>
+      <% end %>
+    </div>
+  </div>
+</div>

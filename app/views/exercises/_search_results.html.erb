@@ -1,0 +1,17 @@
+<% if exercises.any? %>
+  <ul role="list" class="divide-y divide-gray-200">
+    <% exercises.each do |exercise| %>
+      <li class="p-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-semibold text-gray-900"><%= link_to exercise.name, exercise_path(exercise), class: "hover:text-indigo-600" %></p>
+            <p class="text-xs text-gray-500"><%= [exercise.category&.titleize, exercise.muscle_group&.titleize, exercise.difficulty&.titleize].compact.join(" · ") %></p>
+          </div>
+          <span class="text-xs text-gray-500">~ <%= exercise.calories_per_minute || 5 %> cal/min</span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="p-3 text-sm text-gray-500">No exercises found.</div>
+<% end %>

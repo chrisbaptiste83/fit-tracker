@@ -1,0 +1,44 @@
+<div class="space-y-6">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Meal Plans</h1>
+      <p class="text-sm text-gray-500">Plan your meals for the week.</p>
+    </div>
+    <%= link_to "New Meal Plan", new_meal_plan_path, class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+  </div>
+
+  <% if @current_plan %>
+    <div class="rounded-lg bg-white p-4 shadow">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-sm font-semibold text-gray-900">Current Week</h2>
+          <p class="text-xs text-gray-500"><%= @current_plan.date_range %></p>
+        </div>
+        <%= link_to "View", meal_plan_path(@current_plan), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="rounded-lg bg-white shadow">
+    <div class="border-b border-gray-200 px-4 py-3">
+      <h2 class="text-sm font-semibold text-gray-900">Upcoming Plans</h2>
+    </div>
+    <% if @meal_plans.any? %>
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @meal_plans.each do |plan| %>
+          <li class="p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-semibold text-gray-900"><%= link_to plan.date_range, meal_plan_path(plan), class: "hover:text-indigo-600" %></p>
+                <p class="mt-1 text-xs text-gray-500"><%= plan.ai_generated? ? "AI generated" : "Manual" %></p>
+              </div>
+              <%= link_to "Edit", edit_meal_plan_path(plan), class: "text-xs font-medium text-gray-500 hover:text-gray-700" %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="p-6 text-sm text-gray-500">No meal plans yet.</div>
+    <% end %>
+  </div>
+</div>

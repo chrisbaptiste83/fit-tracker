@@ -1,0 +1,44 @@
+<div class="fittrack-sidebar h-full w-80 text-slate-100">
+  <div class="px-6 py-6 border-b border-white/10">
+    <%= link_to root_path, class: "flex items-center gap-3" do %>
+      <div class="h-10 w-10 rounded-2xl bg-white/10 flex items-center justify-center shadow">
+        <svg class="h-6 w-6 text-amber-300" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        </svg>
+      </div>
+      <div>
+        <p class="text-xl font-semibold tracking-tight">FitTrack AI</p>
+        <p class="text-xs text-slate-300">Train smarter, recover better</p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="px-4 py-6">
+    <p class="px-2 text-xs uppercase tracking-[0.2em] text-slate-400">Navigation</p>
+    <ul class="mt-4 space-y-1">
+      <%= render "layouts/nav_links" %>
+    </ul>
+  </div>
+
+  <div class="mt-auto px-4 pb-6">
+    <div class="rounded-2xl bg-white/5 p-4">
+      <p class="text-sm font-semibold">Quick actions</p>
+      <div class="mt-3 grid grid-cols-2 gap-2">
+        <%= link_to new_workout_path, class: "btn btn-sm btn-ghost border border-white/20 text-white hover:bg-white/10" do %>
+          New workout
+        <% end %>
+        <%= link_to ai_path, class: "btn btn-sm btn-primary" do %>
+          AI coach
+        <% end %>
+      </div>
+    </div>
+    <div class="mt-4 space-y-2">
+      <%= link_to profile_path, class: "btn btn-sm btn-outline border-white/20 text-white hover:bg-white/10 w-full" do %>
+        Profile
+      <% end %>
+      <%= button_to session_path, method: :delete, class: "btn btn-sm btn-ghost border border-white/10 text-white/80 hover:bg-white/10 w-full" do %>
+        Sign out
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="fittrack-surface navbar sticky top-0 z-40 rounded-3xl px-4 lg:rounded-full">
+  <div class="flex-none lg:hidden">
+    <label for="fittrack-drawer" class="btn btn-ghost btn-square">
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </label>
+  </div>
+  <div class="flex-1">
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Dashboard</p>
+      <p class="fittrack-title text-lg font-semibold">Welcome back</p>
+    </div>
+  </div>
+  <div class="flex-none gap-2">
+    <%= link_to new_workout_path, class: "btn btn-sm btn-outline border-slate-200 bg-white/70" do %>
+      New workout
+    <% end %>
+    <%= link_to profile_path, class: "btn btn-sm btn-primary" do %>
+      Profile
+    <% end %>
+  </div>
+</div>

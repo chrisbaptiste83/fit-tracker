@@ -1,0 +1,17 @@
+<% role = message["role"] || message[:role] %>
+<% content = message["content"] || message[:content] %>
+<% timestamp = message["timestamp"] || message[:timestamp] %>
+<% is_user = role == "user" %>
+<div class="flex <%= is_user ? 'justify-end' : 'justify-start' %>">
+  <div class="max-w-[75%] rounded-lg px-4 py-2 text-sm <%= is_user ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-800' %>">
+    <p class="whitespace-pre-line"><%= content %></p>
+    <% if timestamp.present? %>
+      <% formatted_time = begin
+        Time.zone.parse(timestamp.to_s).strftime("%b %d, %H:%M")
+      rescue
+        timestamp
+      end %>
+      <p class="mt-1 text-xs <%= is_user ? 'text-indigo-100' : 'text-gray-400' %>"><%= formatted_time %></p>
+    <% end %>
+  </div>
+</div>

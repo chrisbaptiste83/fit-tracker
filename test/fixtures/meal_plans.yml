@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  week_start_date: 2026-02-05
+  ai_generated: false
+  notes: MyText
+
+two:
+  user: two
+  week_start_date: 2026-02-05
+  ai_generated: false
+  notes: MyText

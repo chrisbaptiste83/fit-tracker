@@ -1,0 +1,85 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Profile</h1>
+      <p class="text-sm text-gray-500"><%= @user.email_address %></p>
+    </div>
+    <%= link_to "Edit Profile", edit_profile_path, class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div class="lg:col-span-2 space-y-4">
+      <div class="rounded-lg bg-white p-6 shadow">
+        <h2 class="text-sm font-semibold text-gray-900">Fitness Profile</h2>
+        <dl class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <dt class="text-xs text-gray-500">Height</dt>
+            <dd class="text-sm text-gray-900"><%= @user.height || "-" %> cm</dd>
+          </div>
+          <div>
+            <dt class="text-xs text-gray-500">Weight</dt>
+            <dd class="text-sm text-gray-900"><%= @user.weight || "-" %> kg</dd>
+          </div>
+          <div>
+            <dt class="text-xs text-gray-500">Age</dt>
+            <dd class="text-sm text-gray-900"><%= @user.age || "-" %></dd>
+          </div>
+          <div>
+            <dt class="text-xs text-gray-500">Gender</dt>
+            <dd class="text-sm text-gray-900"><%= @user.gender&.titleize || "-" %></dd>
+          </div>
+          <div>
+            <dt class="text-xs text-gray-500">Goal</dt>
+            <dd class="text-sm text-gray-900"><%= @user.fitness_goal&.titleize || "-" %></dd>
+          </div>
+          <div>
+            <dt class="text-xs text-gray-500">Activity</dt>
+            <dd class="text-sm text-gray-900"><%= @user.activity_level&.titleize || "-" %></dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="rounded-lg bg-white p-6 shadow">
+        <h2 class="text-sm font-semibold text-gray-900">Nutrition Goals</h2>
+        <dl class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <dt class="text-xs text-gray-500">Daily Calories</dt>
+            <dd class="text-sm text-gray-900"><%= @user.daily_calorie_goal || @user.tdee || "-" %></dd>
+          </div>
+          <div>
+            <dt class="text-xs text-gray-500">Protein</dt>
+            <dd class="text-sm text-gray-900"><%= @user.protein_goal || "-" %> g</dd>
+          </div>
+          <div>
+            <dt class="text-xs text-gray-500">Carbs</dt>
+            <dd class="text-sm text-gray-900"><%= @user.carb_goal || "-" %> g</dd>
+          </div>
+          <div>
+            <dt class="text-xs text-gray-500">Fat</dt>
+            <dd class="text-sm text-gray-900"><%= @user.fat_goal || "-" %> g</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="rounded-lg bg-white p-6 shadow">
+        <h2 class="text-sm font-semibold text-gray-900">Stats</h2>
+        <dl class="mt-4 space-y-2 text-sm text-gray-700">
+          <div class="flex items-center justify-between"><dt>Workouts completed</dt><dd><%= @stats[:total_workouts] %></dd></div>
+          <div class="flex items-center justify-between"><dt>Meals logged</dt><dd><%= @stats[:total_meals_logged] %></dd></div>
+          <div class="flex items-center justify-between"><dt>Goals completed</dt><dd><%= @stats[:goals_completed] %></dd></div>
+          <div class="flex items-center justify-between"><dt>Days active</dt><dd><%= @stats[:days_active] %></dd></div>
+        </dl>
+      </div>
+
+      <div class="rounded-lg bg-white p-6 shadow">
+        <h2 class="text-sm font-semibold text-gray-900">Metabolism</h2>
+        <dl class="mt-4 space-y-2 text-sm text-gray-700">
+          <div class="flex items-center justify-between"><dt>BMR</dt><dd><%= @user.bmr || "-" %></dd></div>
+          <div class="flex items-center justify-between"><dt>TDEE</dt><dd><%= @user.tdee || "-" %></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>

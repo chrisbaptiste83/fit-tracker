@@ -1,0 +1,13 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">New Meal Plan</h1>
+      <p class="text-sm text-gray-500">Plan your meals for the week.</p>
+    </div>
+    <%= link_to "Back", meal_plans_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+  </div>
+
+  <div class="rounded-lg bg-white p-6 shadow">
+    <%= render "form", meal_plan: @meal_plan %>
+  </div>
+</div>

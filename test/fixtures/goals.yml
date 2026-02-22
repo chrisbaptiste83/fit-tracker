@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  goal_type: MyString
+  target_value: 9.99
+  current_value: 9.99
+  unit: MyString
+  start_date: 2026-02-05
+  target_date: 2026-02-05
+  completed_at: 2026-02-05 07:16:41
+  description: MyText
+
+two:
+  user: two
+  goal_type: MyString
+  target_value: 9.99
+  current_value: 9.99
+  unit: MyString
+  start_date: 2026-02-05
+  target_date: 2026-02-05
+  completed_at: 2026-02-05 07:16:41
+  description: MyText

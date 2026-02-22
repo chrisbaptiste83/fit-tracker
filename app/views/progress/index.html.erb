@@ -1,0 +1,42 @@
+<div class="space-y-6">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Progress</h1>
+      <p class="text-sm text-gray-500">Track measurements and monitor trends.</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <%= link_to "New Log", new_progress_path, class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" %>
+      <%= link_to "AI Analysis", ai_path, class: "rounded-md bg-white px-4 py-2 text-sm font-semibold text-indigo-600 shadow-sm ring-1 ring-inset ring-indigo-300 hover:bg-indigo-50" %>
+    </div>
+  </div>
+
+  <div class="rounded-lg bg-white p-4 shadow">
+    <%= render "progress/charts" %>
+  </div>
+
+  <div class="rounded-lg bg-white shadow">
+    <div class="border-b border-gray-200 px-4 py-3">
+      <h2 class="text-sm font-semibold text-gray-900">Recent Logs</h2>
+    </div>
+    <% if @progress_logs.any? %>
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @progress_logs.each do |log| %>
+          <li class="p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-semibold text-gray-900"><%= link_to log.date.strftime("%b %d, %Y"), progress_path(log), class: "hover:text-indigo-600" %></p>
+                <p class="mt-1 text-xs text-gray-500">Weight: <%= log.weight || "-" %> · Body fat: <%= log.body_fat_percentage || "-" %></p>
+              </div>
+              <div class="flex items-center gap-2">
+                <%= link_to "Edit", edit_progress_path(log), class: "text-xs font-medium text-gray-500 hover:text-gray-700" %>
+                <%= button_to "Delete", progress_path(log), method: :delete, data: { turbo_confirm: "Delete this log?" }, class: "text-xs font-semibold text-red-600 hover:text-red-700" %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="p-6 text-sm text-gray-500">No progress logs yet.</div>
+    <% end %>
+  </div>
+</div>

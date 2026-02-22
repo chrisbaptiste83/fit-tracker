@@ -1,0 +1,34 @@
+<%= form_with model: workout, local: true, class: "space-y-6" do |f| %>
+  <div class="form-control">
+    <%= f.label :name, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_field :name, required: true, class: "input input-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="form-control">
+      <%= f.label :scheduled_date, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.date_field :scheduled_date, required: true, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :duration_minutes, "Duration (minutes)", class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :duration_minutes, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+    <div class="form-control">
+      <%= f.label :calories_burned, class: "label text-sm font-semibold text-slate-700" %>
+      <%= f.number_field :calories_burned, min: 0, class: "input input-bordered w-full bg-white/80" %>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <%= f.label :notes, class: "label text-sm font-semibold text-slate-700" %>
+    <%= f.text_area :notes, rows: 3, class: "textarea textarea-bordered w-full bg-white/80" %>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <label class="flex items-center gap-2 text-sm font-semibold text-slate-600">
+      <%= f.check_box :ai_generated, class: "checkbox checkbox-primary" %>
+      AI generated
+    </label>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+<% if foods.any? %>
+  <ul role="list" class="divide-y divide-gray-200">
+    <% foods.each do |food| %>
+      <li class="p-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-semibold text-gray-900"><%= link_to food.name, food_path(food), class: "hover:text-indigo-600" %></p>
+            <p class="text-xs text-gray-500"><%= [food.brand.presence, "#{food.serving_size} #{food.serving_unit}".strip.presence].compact.join(" · ") %></p>
+          </div>
+          <span class="text-xs text-gray-500"><%= food.calories %> cal</span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="p-3 text-sm text-gray-500">No foods found.</div>
+<% end %>

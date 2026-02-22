@@ -1,0 +1,44 @@
+<div class="space-y-6">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900"><%= @goal.description %></h1>
+      <p class="mt-1 text-sm text-gray-500"><%= @goal.goal_type.titleize %> goal · Target <%= @goal.target_value %> <%= @goal.unit %></p>
+    </div>
+    <div class="flex items-center gap-2">
+      <% unless @goal.completed? %>
+        <%= button_to "Mark Complete", complete_goal_path(@goal), method: :patch, class: "rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500" %>
+      <% end %>
+      <%= link_to "Edit", edit_goal_path(@goal), class: "rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+      <%= button_to "Delete", goal_path(@goal), method: :delete, data: { turbo_confirm: "Delete this goal?" }, class: "rounded-md bg-white px-3 py-2 text-sm font-semibold text-red-600 shadow-sm ring-1 ring-inset ring-red-200 hover:bg-red-50" %>
+      <%= link_to "Back", goals_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+    </div>
+  </div>
+
+  <div class="rounded-lg bg-white p-6 shadow">
+    <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div>
+        <dt class="text-sm font-medium text-gray-500">Current Value</dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @goal.current_value || 0 %> <%= @goal.unit %></dd>
+      </div>
+      <div>
+        <dt class="text-sm font-medium text-gray-500">Progress</dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @goal.progress_percentage %>%</dd>
+      </div>
+      <div>
+        <dt class="text-sm font-medium text-gray-500">Start Date</dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @goal.start_date.strftime("%b %d, %Y") %></dd>
+      </div>
+      <div>
+        <dt class="text-sm font-medium text-gray-500">Target Date</dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @goal.target_date.strftime("%b %d, %Y") %></dd>
+      </div>
+    </dl>
+
+    <div class="mt-6">
+      <div class="h-2 w-full rounded-full bg-gray-200">
+        <div class="h-2 rounded-full <%= @goal.on_track? ? 'bg-green-600' : 'bg-orange-500' %>" style="width: <%= @goal.progress_percentage %>%"></div>
+      </div>
+      <p class="mt-2 text-xs text-gray-500"><%= @goal.days_remaining %> days remaining</p>
+    </div>
+  </div>
+</div>
