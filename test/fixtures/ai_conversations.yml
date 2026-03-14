@@ -1,11 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
+workout_chat:
   user: one
-  context: MyString
-  messages: 
+  context: workout
+  messages: '[{"role":"user","content":"Give me a workout plan","timestamp":"2026-03-14T10:00:00Z"},{"role":"assistant","content":"Here is a workout plan for you...","timestamp":"2026-03-14T10:00:01Z"}]'
 
-two:
+nutrition_chat:
   user: two
-  context: MyString
-  messages: 
+  context: nutrition
+  messages: '[{"role":"user","content":"What should I eat today?","timestamp":"2026-03-14T09:00:00Z"}]'

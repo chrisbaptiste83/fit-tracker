@@ -1,31 +1,27 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
+chicken_rice_bowl:
   user: one
-  name: MyString
-  description: MyText
-  instructions: MyText
-  prep_time: 1
-  cook_time: 1
-  servings: 1
-  calories: 1
-  protein: 9.99
-  carbs: 9.99
-  fat: 9.99
-  image_url: MyString
+  name: Chicken Rice Bowl
+  description: High protein post-workout meal
+  instructions: Cook chicken, serve over brown rice with vegetables
+  prep_time: 10
+  cook_time: 25
+  servings: 2
+  calories: 450
+  protein: 42.0
+  carbs: 48.0
+  fat: 8.0
   ai_generated: false
 
-two:
+protein_smoothie:
   user: two
-  name: MyString
-  description: MyText
-  instructions: MyText
-  prep_time: 1
-  cook_time: 1
+  name: Protein Smoothie
+  description: Quick breakfast smoothie
+  instructions: Blend all ingredients until smooth
+  prep_time: 5
+  cook_time: 0
   servings: 1
-  calories: 1
-  protein: 9.99
-  carbs: 9.99
-  fat: 9.99
-  image_url: MyString
-  ai_generated: false
+  calories: 320
+  protein: 30.0
+  carbs: 35.0
+  fat: 6.0
+  ai_generated: true

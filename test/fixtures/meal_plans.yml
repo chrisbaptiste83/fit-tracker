@@ -1,13 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
+week_plan:
   user: one
-  week_start_date: 2026-02-05
+  week_start_date: 2026-03-09
   ai_generated: false
-  notes: MyText
+  notes: Weekly meal plan
 
-two:
+ai_week_plan:
   user: two
-  week_start_date: 2026-02-05
-  ai_generated: false
-  notes: MyText
+  week_start_date: 2026-03-09
+  ai_generated: true
+  notes: AI generated plan

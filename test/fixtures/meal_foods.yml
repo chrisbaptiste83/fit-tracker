@@ -1,11 +1,14 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+breakfast_chicken:
+  meal: breakfast
+  food: chicken_breast
+  servings: 1.5
 
-one:
-  meal: one
-  food: one
-  servings: 9.99
+breakfast_rice:
+  meal: breakfast
+  food: brown_rice
+  servings: 1.0
 
-two:
-  meal: two
-  food: two
-  servings: 9.99
+lunch_item:
+  meal: lunch
+  food: banana
+  servings: 2.0

@@ -1,21 +1,29 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+bench_press:
+  name: Bench Press
+  description: Classic chest press exercise
+  category: strength
+  muscle_group: chest
+  equipment_needed: barbell, bench
+  difficulty: intermediate
+  calories_per_minute: 8.0
+  instructions: Lie on bench, lower bar to chest, press up
 
-one:
-  name: MyString
-  description: MyText
-  category: MyString
-  muscle_group: MyString
-  equipment_needed: MyString
-  difficulty: MyString
-  calories_per_minute: 9.99
-  instructions: MyText
+squat:
+  name: Squat
+  description: Compound lower body exercise
+  category: strength
+  muscle_group: legs
+  equipment_needed: barbell
+  difficulty: intermediate
+  calories_per_minute: 9.0
+  instructions: Stand with feet shoulder width, bend knees to parallel, stand up
 
-two:
-  name: MyString
-  description: MyText
-  category: MyString
-  muscle_group: MyString
-  equipment_needed: MyString
-  difficulty: MyString
-  calories_per_minute: 9.99
-  instructions: MyText
+running:
+  name: Treadmill Running
+  description: Cardiovascular endurance exercise
+  category: cardio
+  muscle_group: full_body
+  equipment_needed: treadmill
+  difficulty: beginner
+  calories_per_minute: 12.0
+  instructions: Run at steady pace on treadmill

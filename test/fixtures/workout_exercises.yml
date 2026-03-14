@@ -1,21 +1,19 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  workout: one
-  exercise: one
-  sets: 1
-  reps: 1
-  weight: 9.99
-  duration_seconds: 1
-  rest_seconds: 1
+bench_press_set:
+  workout: completed_workout
+  exercise: bench_press
+  sets: 4
+  reps: 8
+  weight: 80.0
+  duration_seconds: 180
+  rest_seconds: 90
   order: 1
 
-two:
-  workout: two
-  exercise: two
-  sets: 1
-  reps: 1
-  weight: 9.99
-  duration_seconds: 1
-  rest_seconds: 1
-  order: 1
+squat_set:
+  workout: completed_workout
+  exercise: squat
+  sets: 3
+  reps: 10
+  weight: 100.0
+  duration_seconds: 150
+  rest_seconds: 120
+  order: 2

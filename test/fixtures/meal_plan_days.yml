@@ -1,17 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  meal_plan: one
+monday:
+  meal_plan: week_plan
   day_of_week: 1
-  breakfast_recipe: one
-  lunch_recipe: one
-  dinner_recipe: one
-  snacks: MyText
+  breakfast_recipe: chicken_rice_bowl
+  lunch_recipe: chicken_rice_bowl
+  dinner_recipe: chicken_rice_bowl
+  snacks: Apple, almonds
 
-two:
-  meal_plan: two
-  day_of_week: 1
-  breakfast_recipe: two
-  lunch_recipe: two
-  dinner_recipe: two
-  snacks: MyText
+tuesday:
+  meal_plan: ai_week_plan
+  day_of_week: 2
+  breakfast_recipe: protein_smoothie
+  lunch_recipe: protein_smoothie
+  dinner_recipe: protein_smoothie
+  snacks: Banana, protein bar

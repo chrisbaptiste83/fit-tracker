@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "dashboard", to: "dashboard#index"
 
   # Profile
-  resource :profile, only: [:show, :edit, :update]
+  resource :profile, only: [:show, :edit, :update], controller: :profile
 
   # Workouts & Exercises
   resources :workouts do
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   end
 
   # Progress & Goals
-  resources :progress_logs, path: "progress", as: :progress do
+  resources :progress_logs, path: "progress", as: :progress, controller: :progress do
     collection do
       get :charts
     end

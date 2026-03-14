@@ -1,25 +1,25 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
+log_week1:
   user: one
-  date: 2026-02-05
-  weight: 9.99
-  body_fat_percentage: 9.99
-  chest: 9.99
-  waist: 9.99
-  hips: 9.99
-  arms: 9.99
-  thighs: 9.99
-  notes: MyText
+  date: 2026-03-01
+  weight: 81.0
+  body_fat_percentage: 18.5
+  chest: 95.0
+  waist: 82.0
+  hips: 96.0
+  arms: 35.0
+  thighs: 56.0
+  notes: Starting measurements
 
-two:
+log_week2:
+  user: one
+  date: 2026-03-08
+  weight: 80.5
+  body_fat_percentage: 18.2
+  notes: Slight decrease
+
+other_user_log:
   user: two
-  date: 2026-02-05
-  weight: 9.99
-  body_fat_percentage: 9.99
-  chest: 9.99
-  waist: 9.99
-  hips: 9.99
-  arms: 9.99
-  thighs: 9.99
-  notes: MyText
+  date: 2026-03-01
+  weight: 65.0
+  body_fat_percentage: 22.0
+  notes: Baseline

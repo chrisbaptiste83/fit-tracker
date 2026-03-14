@@ -1,23 +1,30 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
+active_weight_goal:
   user: one
-  goal_type: MyString
-  target_value: 9.99
-  current_value: 9.99
-  unit: MyString
-  start_date: 2026-02-05
-  target_date: 2026-02-05
-  completed_at: 2026-02-05 07:16:41
-  description: MyText
+  goal_type: weight
+  target_value: 75.0
+  current_value: 80.0
+  unit: kg
+  start_date: 2026-01-01
+  target_date: 2026-06-01
+  description: Lose 5kg by summer
 
-two:
+completed_strength_goal:
+  user: one
+  goal_type: strength
+  target_value: 100.0
+  current_value: 100.0
+  unit: kg
+  start_date: 2026-01-01
+  target_date: 2026-03-01
+  completed_at: 2026-03-01 10:00:00
+  description: Bench press 100kg
+
+other_user_goal:
   user: two
-  goal_type: MyString
-  target_value: 9.99
-  current_value: 9.99
-  unit: MyString
-  start_date: 2026-02-05
-  target_date: 2026-02-05
-  completed_at: 2026-02-05 07:16:41
-  description: MyText
+  goal_type: nutrition
+  target_value: 130.0
+  current_value: 110.0
+  unit: g protein/day
+  start_date: 2026-02-01
+  target_date: 2026-05-01
+  description: Hit daily protein goal consistently
