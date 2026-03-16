@@ -52,7 +52,7 @@ gem "thruster", require: false
 
 group :development, :test do
   # Pin minitest to 5.x — minitest 6 (bundled with Ruby 3.4) is incompatible with Rails 8 line filtering
-  gem "minitest", "~> 5.1"
+  gem "minitest", "~> 6.0"
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
