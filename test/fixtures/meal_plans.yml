@@ -1,11 +1,11 @@
-alice_weekly_plan:
-  user: alice
+week_plan:
+  user: one
   week_start_date: 2026-03-09
   ai_generated: false
-  notes: March week 2 plan
+  notes: Weekly meal plan
 
-bob_weekly_plan:
-  user: bob
+ai_week_plan:
+  user: two
   week_start_date: 2026-03-09
-  ai_generated: false
-  notes: Bulk week plan
+  ai_generated: true
+  notes: AI generated plan

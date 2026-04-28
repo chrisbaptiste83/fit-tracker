@@ -1,14 +1,14 @@
-chicken_in_breakfast:
-  meal: alice_breakfast
+breakfast_chicken:
+  meal: breakfast
   food: chicken_breast
   servings: 1.5
 
-rice_in_breakfast:
-  meal: alice_breakfast
+breakfast_rice:
+  meal: breakfast
   food: brown_rice
   servings: 1.0
 
-banana_in_lunch:
-  meal: alice_lunch
+lunch_item:
+  meal: lunch
   food: banana
   servings: 2.0

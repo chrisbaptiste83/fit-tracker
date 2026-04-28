@@ -1,17 +1,16 @@
-alice_breakfast:
-  user: alice
+breakfast:
+  user: one
   meal_type: breakfast
-  date: 2026-03-01
-  notes: High protein start
+  date: 2026-03-14
+  notes: Morning meal
 
-alice_lunch:
-  user: alice
+lunch:
+  user: one
   meal_type: lunch
-  date: 2026-03-01
-  notes: Post-workout meal
+  date: 2026-03-14
+  notes: Midday meal
 
-bob_dinner:
-  user: bob
+other_user_meal:
+  user: two
   meal_type: dinner
-  date: 2026-03-01
-  notes: Bulk meal
+  date: 2026-03-14

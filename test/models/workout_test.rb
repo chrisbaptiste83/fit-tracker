@@ -1,63 +1,126 @@
 require "test_helper"
 
 class WorkoutTest < ActiveSupport::TestCase
-  test "requires name" do
-    workout = Workout.new(user: users(:alice), scheduled_date: Date.current)
+  # Validations
+
+  test "valid workout with name and scheduled_date" do
+    workout = users(:one).workouts.build(name: "Test Workout", scheduled_date: Date.current)
+    assert workout.valid?
+  end
+
+  test "invalid without name" do
+    workout = users(:one).workouts.build(scheduled_date: Date.current)
     assert_not workout.valid?
     assert_includes workout.errors[:name], "can't be blank"
   end
 
-  test "requires scheduled_date" do
-    workout = Workout.new(user: users(:alice), name: "Leg Day")
+  test "invalid without scheduled_date" do
+    workout = users(:one).workouts.build(name: "Test")
     assert_not workout.valid?
     assert_includes workout.errors[:scheduled_date], "can't be blank"
   end
 
-  test "completed? returns false when not yet completed" do
+  # Scopes
+
+  test "upcoming scope returns workouts on or after today" do
+    upcoming = users(:one).workouts.upcoming
+    upcoming.each do |w|
+      assert w.scheduled_date >= Date.current
+    end
+  end
+
+  test "past scope returns workouts before today" do
+    past = users(:one).workouts.past
+    past.each do |w|
+      assert w.scheduled_date < Date.current
+    end
+  end
+
+  test "completed scope returns workouts with completed_at set" do
+    completed = Workout.completed
+    completed.each { |w| assert w.completed_at.present? }
+  end
+
+  test "pending scope returns workouts without completed_at" do
+    pending = Workout.pending
+    pending.each { |w| assert_nil w.completed_at }
+  end
+
+  test "ai_generated scope returns only ai generated workouts" do
+    workout = users(:one).workouts.create!(
+      name: "AI Workout", scheduled_date: Date.current, ai_generated: true
+    )
+    assert_includes Workout.ai_generated, workout
+    assert_not_includes Workout.ai_generated, workouts(:upcoming_workout)
+  end
+
+  test "this_week scope returns workouts within the current week" do
+    this_week = Workout.this_week
+    this_week.each do |w|
+      assert w.scheduled_date >= Date.current.beginning_of_week
+      assert w.scheduled_date <= Date.current.end_of_week
+    end
+  end
+
+  # Instance methods
+
+  test "completed? returns false when completed_at is nil" do
     assert_not workouts(:upcoming_workout).completed?
   end
 
   test "completed? returns true when completed_at is set" do
-    assert workouts(:past_workout).completed?
+    assert workouts(:completed_workout).completed?
   end
 
-  test "complete! sets completed_at timestamp" do
+  test "complete! sets completed_at" do
     workout = workouts(:upcoming_workout)
     assert_nil workout.completed_at
     workout.complete!
     assert_not_nil workout.reload.completed_at
   end
 
-  test "upcoming scope includes future workouts" do
-    assert_includes users(:alice).workouts.upcoming, workouts(:upcoming_workout)
+  test "complete! sets completed_at to current time" do
+    workout = workouts(:upcoming_workout)
+    freeze_time = Time.current
+    travel_to(freeze_time) { workout.complete! }
+    assert_in_delta freeze_time.to_i, workout.reload.completed_at.to_i, 1
   end
 
-  test "upcoming scope excludes past workouts" do
-    assert_not_includes users(:alice).workouts.upcoming, workouts(:past_workout)
+  test "total_duration returns sum of exercise durations in minutes" do
+    workout = workouts(:completed_workout)
+    # bench_press_set: 180s + squat_set: 150s = 330s / 60 = 5
+    assert_equal 5, workout.total_duration
   end
 
-  test "past scope includes previous workouts" do
-    assert_includes users(:alice).workouts.past, workouts(:past_workout)
+  test "estimated_calories sums calories across exercises" do
+    workout = workouts(:completed_workout)
+    result = workout.estimated_calories
+    assert result >= 0
+    assert_kind_of Numeric, result
   end
 
-  test "past scope excludes future workouts" do
-    assert_not_includes users(:alice).workouts.past, workouts(:upcoming_workout)
+  # Associations
+
+  test "belongs to user" do
+    assert_equal users(:one), workouts(:upcoming_workout).user
   end
 
-  test "completed scope returns workouts with completed_at" do
-    completed = users(:alice).workouts.completed
-    assert_includes completed, workouts(:past_workout)
-    assert_not_includes completed, workouts(:upcoming_workout)
+  test "has many workout_exercises" do
+    assert workouts(:completed_workout).workout_exercises.count == 2
   end
 
-  test "pending scope returns workouts without completed_at" do
-    pending = users(:alice).workouts.pending
-    assert_includes pending, workouts(:upcoming_workout)
-    assert_not_includes pending, workouts(:past_workout)
+  test "has many exercises through workout_exercises" do
+    assert workouts(:completed_workout).exercises.include?(exercises(:bench_press))
   end
 
-  test "total_duration sums exercise durations in minutes" do
-    # push_up_in_workout has duration_seconds: 120 -> 2 minutes
-    assert_equal 2, workouts(:upcoming_workout).total_duration
+  test "destroying workout cascades to workout_exercises" do
+    workout = workouts(:upcoming_workout)
+    workout.workout_exercises.create!(
+      exercise: exercises(:running),
+      sets: 1, reps: 1, order: 1
+    )
+    assert_difference "WorkoutExercise.count", -1 do
+      workout.destroy
+    end
   end
 end

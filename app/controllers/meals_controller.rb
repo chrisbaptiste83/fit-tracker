@@ -8,6 +8,7 @@ class MealsController < ApplicationController
 
   def show
     @meal_foods = @meal.meal_foods.includes(:food)
+    @foods = Food.order(:name).limit(50)
   end
 
   def new

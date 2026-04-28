@@ -1,29 +1,29 @@
-push_up:
-  name: Push Up
-  description: Classic bodyweight chest exercise
+bench_press:
+  name: Bench Press
+  description: Classic chest press exercise
   category: strength
   muscle_group: chest
-  equipment_needed: None
-  difficulty: beginner
-  calories_per_minute: 8.0
-  instructions: Start in plank position, lower chest to floor, push back up.
-
-running:
-  name: Running
-  description: Cardiovascular endurance exercise
-  category: cardio
-  muscle_group: legs
-  equipment_needed: None
+  equipment_needed: barbell, bench
   difficulty: intermediate
-  calories_per_minute: 10.0
-  instructions: Run at a steady pace for the desired duration.
+  calories_per_minute: 8.0
+  instructions: Lie on bench, lower bar to chest, press up
 
 squat:
-  name: Barbell Squat
-  description: Compound lower body strength exercise
+  name: Squat
+  description: Compound lower body exercise
   category: strength
   muscle_group: legs
-  equipment_needed: Barbell, Rack
+  equipment_needed: barbell
   difficulty: intermediate
-  calories_per_minute: 7.0
-  instructions: Stand with barbell on traps, squat until thighs are parallel, drive back up.
+  calories_per_minute: 9.0
+  instructions: Stand with feet shoulder width, bend knees to parallel, stand up
+
+running:
+  name: Treadmill Running
+  description: Cardiovascular endurance exercise
+  category: cardio
+  muscle_group: full_body
+  equipment_needed: treadmill
+  difficulty: beginner
+  calories_per_minute: 12.0
+  instructions: Run at steady pace on treadmill

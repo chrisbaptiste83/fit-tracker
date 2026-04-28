@@ -1,22 +1,25 @@
-alice_march_log:
-  user: alice
+log_week1:
+  user: one
   date: 2026-03-01
-  weight: 70.5
-  body_fat_percentage: 22.5
-  waist: 75.0
-  notes: Monthly check-in
+  weight: 81.0
+  body_fat_percentage: 18.5
+  chest: 95.0
+  waist: 82.0
+  hips: 96.0
+  arms: 35.0
+  thighs: 56.0
+  notes: Starting measurements
 
-alice_feb_log:
-  user: alice
-  date: 2026-02-01
-  weight: 71.2
-  body_fat_percentage: 23.1
-  waist: 76.0
-  notes: February baseline
+log_week2:
+  user: one
+  date: 2026-03-08
+  weight: 80.5
+  body_fat_percentage: 18.2
+  notes: Slight decrease
 
-bob_march_log:
-  user: bob
+other_user_log:
+  user: two
   date: 2026-03-01
-  weight: 80.0
-  body_fat_percentage: 15.0
-  notes: Steady bulk
+  weight: 65.0
+  body_fat_percentage: 22.0
+  notes: Baseline

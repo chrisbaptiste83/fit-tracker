@@ -4,7 +4,7 @@ require "rails/test_help"
 
 module ActiveSupport
   class TestCase
-    # Run tests in a single process (avoids DRb/minitest 6 incompatibility)
+    # Run tests serially (parallelization has minitest 6 compatibility issues)
     parallelize(workers: 1)
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -14,14 +14,17 @@ module ActiveSupport
   end
 end
 
-module ActionDispatch
-  class IntegrationTest
-    def sign_in(user, password: "password")
-      post session_url, params: { email_address: user.email_address, password: password }
-    end
-
-    def sign_out
-      delete session_url
-    end
+module AuthenticationHelper
+  # Signs in via the real sessions controller so the signed cookie is set correctly.
+  def sign_in(user, password: "password")
+    post session_path, params: { email_address: user.email_address, password: password }
   end
+
+  def sign_out
+    delete session_path
+  end
+end
+
+class ActionDispatch::IntegrationTest
+  include AuthenticationHelper
 end

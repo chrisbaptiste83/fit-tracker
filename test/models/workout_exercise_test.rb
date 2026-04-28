@@ -1,39 +1,60 @@
 require "test_helper"
 
 class WorkoutExerciseTest < ActiveSupport::TestCase
-  test "auto-sets order before validation on create" do
+  # Validations
+
+  test "valid workout exercise with required associations" do
     we = WorkoutExercise.new(
       workout: workouts(:upcoming_workout),
-      exercise: exercises(:running)
+      exercise: exercises(:running),
+      sets: 3, reps: 12, order: 1
     )
     assert we.valid?
-    assert_not_nil we.order
   end
 
-  test "auto-sets order sequentially after existing exercises" do
-    workout = workouts(:upcoming_workout)
-    existing_max = workout.workout_exercises.maximum(:order)
-
-    new_we = WorkoutExercise.create!(
-      workout: workout,
-      exercise: exercises(:running)
+  test "auto-sets order on create when not provided" do
+    we = workouts(:upcoming_workout).workout_exercises.create!(
+      exercise: exercises(:running),
+      sets: 3, reps: 10
     )
-    assert_equal existing_max + 1, new_we.order
+    assert_not_nil we.order
+    assert we.order > 0
   end
 
-  test "volume returns sets times reps times weight" do
-    we = WorkoutExercise.new(sets: 3, reps: 10, weight: 50.0)
-    assert_equal 1500.0, we.volume
+  test "order auto-increments from existing max" do
+    workout = workouts(:completed_workout)
+    max_order = workout.workout_exercises.maximum(:order)
+    new_we = workout.workout_exercises.create!(
+      exercise: exercises(:running),
+      sets: 1, reps: 1
+    )
+    assert_equal max_order + 1, new_we.order
   end
 
-  test "volume returns zero for bodyweight exercises with no weight" do
-    we = workout_exercises(:push_up_in_workout)
-    # sets: 3, reps: 10, weight: 0
-    assert_equal 0.0, we.volume
+  # volume calculation
+
+  test "volume returns sets * reps * weight" do
+    we = workout_exercises(:bench_press_set) # sets=4, reps=8, weight=80.0
+    assert_in_delta 4 * 8 * 80.0, we.volume, 0.01
   end
 
-  test "volume handles nil values gracefully" do
+  test "volume returns 0.0 when sets/reps/weight are nil" do
     we = WorkoutExercise.new(sets: nil, reps: nil, weight: nil)
-    assert_equal 0.0, we.volume
+    assert_in_delta 0.0, we.volume, 0.01
+  end
+
+  test "volume handles zero weight correctly" do
+    we = WorkoutExercise.new(sets: 3, reps: 10, weight: 0)
+    assert_in_delta 0.0, we.volume, 0.01
+  end
+
+  # Associations
+
+  test "belongs to workout" do
+    assert_equal workouts(:completed_workout), workout_exercises(:bench_press_set).workout
+  end
+
+  test "belongs to exercise" do
+    assert_equal exercises(:bench_press), workout_exercises(:bench_press_set).exercise
   end
 end

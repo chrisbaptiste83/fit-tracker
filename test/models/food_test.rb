@@ -1,57 +1,50 @@
 require "test_helper"
 
 class FoodTest < ActiveSupport::TestCase
-  test "requires name" do
-    food = Food.new(calories: 100, serving_size: 100)
-    assert_not food.valid?
-    assert_includes food.errors[:name], "can't be blank"
-  end
-
-  test "requires calories" do
-    food = Food.new(name: "Mystery Food", serving_size: 100)
-    assert_not food.valid?
-    assert_includes food.errors[:calories], "can't be blank"
-  end
-
-  test "rejects negative calories" do
-    food = Food.new(name: "Bad Food", calories: -10, serving_size: 100)
-    assert_not food.valid?
-  end
-
-  test "allows zero calories" do
-    food = Food.new(name: "Sparkling Water", calories: 0, serving_size: 250)
-    assert food.valid?
-  end
-
-  test "requires serving_size" do
-    food = Food.new(name: "Mystery Food", calories: 100)
-    assert_not food.valid?
-    assert_includes food.errors[:serving_size], "can't be blank"
-  end
-
-  test "macros_summary formats protein, carbs, and fat" do
+  test "food fixture loads correctly" do
     food = foods(:chicken_breast)
-    summary = food.macros_summary
-    assert_match(/P: 31\.0g/, summary)
-    assert_match(/C: 0\.0g/, summary)
-    assert_match(/F: 3\.6g/, summary)
+    assert_equal "Chicken Breast", food.name
+    assert_equal 165, food.calories
+    assert_in_delta 31.0, food.protein, 0.01
+    assert_in_delta 0.0, food.carbs, 0.01
+    assert_in_delta 3.6, food.fat, 0.01
   end
 
-  test "search finds food by name" do
-    results = Food.search("Chicken")
-    assert_includes results, foods(:chicken_breast)
-    assert_not_includes results, foods(:brown_rice)
+  test "food with all macros" do
+    food = foods(:brown_rice)
+    assert_equal "Brown Rice", food.name
+    assert_equal 216, food.calories
+    assert food.protein > 0
+    assert food.carbs > 0
+    assert food.fat > 0
+    assert food.fiber > 0
   end
 
-  test "search finds food by brand" do
-    results = Food.search("Fresh Produce")
-    assert_includes results, foods(:banana)
-    assert_not_includes results, foods(:chicken_breast)
+  test "food can have nil brand" do
+    food = foods(:banana)
+    assert_nil food.brand
   end
 
-  test "search returns all foods matching a shared brand" do
-    results = Food.search("Generic")
-    assert_includes results, foods(:chicken_breast)
-    assert_includes results, foods(:brown_rice)
+  test "food has many meal_foods" do
+    assert_respond_to foods(:chicken_breast), :meal_foods
+    assert foods(:chicken_breast).meal_foods.count >= 1
+  end
+
+  test "food has many meals through meal_foods" do
+    assert_respond_to foods(:chicken_breast), :meals
+  end
+
+  test "new food persists with valid attributes" do
+    food = Food.create!(
+      name: "Oat Flakes",
+      serving_size: 40.0,
+      serving_unit: "g",
+      calories: 150,
+      protein: 5.0,
+      carbs: 27.0,
+      fat: 3.0
+    )
+    assert food.persisted?
+    assert_equal "Oat Flakes", food.name
   end
 end

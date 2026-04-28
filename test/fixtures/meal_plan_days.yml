@@ -1,12 +1,15 @@
-alice_monday:
-  meal_plan: alice_weekly_plan
+monday:
+  meal_plan: week_plan
   day_of_week: 1
-  breakfast_recipe: protein_oats
-  lunch_recipe: chicken_salad
-  snacks: Apple and almond butter
+  breakfast_recipe: chicken_rice_bowl
+  lunch_recipe: chicken_rice_bowl
+  dinner_recipe: chicken_rice_bowl
+  snacks: Apple, almonds
 
-bob_monday:
-  meal_plan: bob_weekly_plan
-  day_of_week: 1
-  dinner_recipe: beef_stir_fry
-  snacks: Protein shake
+tuesday:
+  meal_plan: ai_week_plan
+  day_of_week: 2
+  breakfast_recipe: protein_smoothie
+  lunch_recipe: protein_smoothie
+  dinner_recipe: protein_smoothie
+  snacks: Banana, protein bar

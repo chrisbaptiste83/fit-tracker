@@ -1,25 +1,25 @@
 upcoming_workout:
-  user: alice
-  name: Morning Push Day
-  scheduled_date: <%= 7.days.from_now.to_date %>
-  duration_minutes: 45
-  calories_burned: 300
-  notes: Focus on chest and triceps
+  user: one
+  name: Morning Strength Session
+  scheduled_date: <%= Date.current + 1.day %>
+  duration_minutes: 60
+  calories_burned: 400
+  notes: Focus on compound lifts
   ai_generated: false
 
-past_workout:
-  user: alice
-  name: Last Week Run
-  scheduled_date: <%= 7.days.ago.to_date %>
-  completed_at: <%= 7.days.ago %>
+completed_workout:
+  user: one
+  name: Chest Day
+  scheduled_date: <%= Date.current - 2.days %>
+  completed_at: <%= 2.days.ago %>
+  duration_minutes: 45
+  calories_burned: 350
+  ai_generated: false
+
+other_user_workout:
+  user: two
+  name: Cardio Session
+  scheduled_date: <%= Date.current %>
   duration_minutes: 30
   calories_burned: 250
-  notes: Easy pace
-  ai_generated: false
-
-bobs_workout:
-  user: bob
-  name: Bob Leg Day
-  scheduled_date: <%= 3.days.from_now.to_date %>
-  duration_minutes: 60
   ai_generated: false

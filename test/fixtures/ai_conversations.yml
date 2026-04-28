@@ -1,9 +1,9 @@
-alice_workout_chat:
-  user: alice
+workout_chat:
+  user: one
   context: workout
-  messages: "[]"
+  messages: '[{"role":"user","content":"Give me a workout plan","timestamp":"2026-03-14T10:00:00Z"},{"role":"assistant","content":"Here is a workout plan for you...","timestamp":"2026-03-14T10:00:01Z"}]'
 
-alice_nutrition_chat:
-  user: alice
+nutrition_chat:
+  user: two
   context: nutrition
-  messages: "[]"
+  messages: '[{"role":"user","content":"What should I eat today?","timestamp":"2026-03-14T09:00:00Z"}]'
