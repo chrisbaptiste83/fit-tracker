@@ -1,9 +1,29 @@
 <% password_digest = BCrypt::Password.create("password") %>
 
-one:
-  email_address: one@example.com
+alice:
+  email_address: alice@example.com
   password_digest: <%= password_digest %>
+  height: 170
+  weight: 70
+  age: 30
+  gender: female
+  fitness_goal: lose_weight
+  activity_level: moderate
+  daily_calorie_goal: 1800
+  protein_goal: 120
+  carb_goal: 200
+  fat_goal: 60
 
-two:
-  email_address: two@example.com
+bob:
+  email_address: bob@example.com
   password_digest: <%= password_digest %>
+  height: 180
+  weight: 80
+  age: 25
+  gender: male
+  fitness_goal: build_muscle
+  activity_level: active
+  daily_calorie_goal: 2500
+  protein_goal: 180
+  carb_goal: 280
+  fat_goal: 80

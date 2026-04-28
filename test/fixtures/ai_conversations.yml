@@ -1,11 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+alice_workout_chat:
+  user: alice
+  context: workout
+  messages: "[]"
 
-one:
-  user: one
-  context: MyString
-  messages: 
-
-two:
-  user: two
-  context: MyString
-  messages: 
+alice_nutrition_chat:
+  user: alice
+  context: nutrition
+  messages: "[]"

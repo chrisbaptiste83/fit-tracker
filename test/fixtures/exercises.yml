@@ -1,21 +1,29 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+push_up:
+  name: Push Up
+  description: Classic bodyweight chest exercise
+  category: strength
+  muscle_group: chest
+  equipment_needed: None
+  difficulty: beginner
+  calories_per_minute: 8.0
+  instructions: Start in plank position, lower chest to floor, push back up.
 
-one:
-  name: MyString
-  description: MyText
-  category: MyString
-  muscle_group: MyString
-  equipment_needed: MyString
-  difficulty: MyString
-  calories_per_minute: 9.99
-  instructions: MyText
+running:
+  name: Running
+  description: Cardiovascular endurance exercise
+  category: cardio
+  muscle_group: legs
+  equipment_needed: None
+  difficulty: intermediate
+  calories_per_minute: 10.0
+  instructions: Run at a steady pace for the desired duration.
 
-two:
-  name: MyString
-  description: MyText
-  category: MyString
-  muscle_group: MyString
-  equipment_needed: MyString
-  difficulty: MyString
-  calories_per_minute: 9.99
-  instructions: MyText
+squat:
+  name: Barbell Squat
+  description: Compound lower body strength exercise
+  category: strength
+  muscle_group: legs
+  equipment_needed: Barbell, Rack
+  difficulty: intermediate
+  calories_per_minute: 7.0
+  instructions: Stand with barbell on traps, squat until thighs are parallel, drive back up.

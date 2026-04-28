@@ -1,21 +1,25 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  user: one
-  name: MyString
-  scheduled_date: 2026-02-05
-  completed_at: 2026-02-05 07:12:00
-  duration_minutes: 1
-  calories_burned: 1
-  notes: MyText
+upcoming_workout:
+  user: alice
+  name: Morning Push Day
+  scheduled_date: <%= 7.days.from_now.to_date %>
+  duration_minutes: 45
+  calories_burned: 300
+  notes: Focus on chest and triceps
   ai_generated: false
 
-two:
-  user: two
-  name: MyString
-  scheduled_date: 2026-02-05
-  completed_at: 2026-02-05 07:12:00
-  duration_minutes: 1
-  calories_burned: 1
-  notes: MyText
+past_workout:
+  user: alice
+  name: Last Week Run
+  scheduled_date: <%= 7.days.ago.to_date %>
+  completed_at: <%= 7.days.ago %>
+  duration_minutes: 30
+  calories_burned: 250
+  notes: Easy pace
+  ai_generated: false
+
+bobs_workout:
+  user: bob
+  name: Bob Leg Day
+  scheduled_date: <%= 3.days.from_now.to_date %>
+  duration_minutes: 60
   ai_generated: false

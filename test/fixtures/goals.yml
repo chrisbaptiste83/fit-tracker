@@ -1,23 +1,30 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+weight_loss:
+  user: alice
+  goal_type: weight
+  target_value: 65.0
+  current_value: 32.5
+  unit: kg
+  start_date: 2026-01-01
+  target_date: 2026-12-01
+  description: Reach target weight of 65kg
 
-one:
-  user: one
-  goal_type: MyString
-  target_value: 9.99
-  current_value: 9.99
-  unit: MyString
-  start_date: 2026-02-05
-  target_date: 2026-02-05
-  completed_at: 2026-02-05 07:16:41
-  description: MyText
+strength_gain:
+  user: bob
+  goal_type: strength
+  target_value: 100.0
+  current_value: 80.0
+  unit: kg
+  start_date: 2026-01-01
+  target_date: 2026-06-01
+  description: Bench press 100kg
 
-two:
-  user: two
-  goal_type: MyString
-  target_value: 9.99
-  current_value: 9.99
-  unit: MyString
-  start_date: 2026-02-05
-  target_date: 2026-02-05
-  completed_at: 2026-02-05 07:16:41
-  description: MyText
+completed_habit:
+  user: alice
+  goal_type: habit
+  target_value: 30.0
+  current_value: 30.0
+  unit: days
+  start_date: 2026-01-01
+  target_date: 2026-02-01
+  completed_at: 2026-02-01 10:00:00
+  description: 30-day workout streak

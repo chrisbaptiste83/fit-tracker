@@ -1,13 +1,17 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+alice_breakfast:
+  user: alice
+  meal_type: breakfast
+  date: 2026-03-01
+  notes: High protein start
 
-one:
-  user: one
-  meal_type: MyString
-  date: 2026-02-05
-  notes: MyText
+alice_lunch:
+  user: alice
+  meal_type: lunch
+  date: 2026-03-01
+  notes: Post-workout meal
 
-two:
-  user: two
-  meal_type: MyString
-  date: 2026-02-05
-  notes: MyText
+bob_dinner:
+  user: bob
+  meal_type: dinner
+  date: 2026-03-01
+  notes: Bulk meal

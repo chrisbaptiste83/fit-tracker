@@ -1,31 +1,41 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  user: one
-  name: MyString
-  description: MyText
-  instructions: MyText
-  prep_time: 1
-  cook_time: 1
-  servings: 1
-  calories: 1
-  protein: 9.99
-  carbs: 9.99
-  fat: 9.99
-  image_url: MyString
+chicken_salad:
+  user: alice
+  name: Chicken Salad
+  description: Light, high-protein lunch
+  instructions: Grill chicken, slice, toss with greens and dressing.
+  prep_time: 10
+  cook_time: 15
+  servings: 2
+  calories: 350
+  protein: 40.0
+  carbs: 12.0
+  fat: 14.0
   ai_generated: false
 
-two:
-  user: two
-  name: MyString
-  description: MyText
-  instructions: MyText
-  prep_time: 1
-  cook_time: 1
+protein_oats:
+  user: alice
+  name: Protein Oats
+  description: High-protein breakfast bowl
+  instructions: Cook oats, stir in protein powder and banana.
+  prep_time: 5
+  cook_time: 5
   servings: 1
-  calories: 1
-  protein: 9.99
-  carbs: 9.99
-  fat: 9.99
-  image_url: MyString
+  calories: 420
+  protein: 35.0
+  carbs: 55.0
+  fat: 8.0
+  ai_generated: false
+
+beef_stir_fry:
+  user: bob
+  name: Beef Stir Fry
+  description: Calorie-dense bulking meal
+  instructions: Stir fry beef and vegetables in sesame oil, serve over rice.
+  prep_time: 10
+  cook_time: 20
+  servings: 2
+  calories: 650
+  protein: 45.0
+  carbs: 60.0
+  fat: 20.0
   ai_generated: false

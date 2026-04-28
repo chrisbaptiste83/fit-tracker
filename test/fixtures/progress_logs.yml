@@ -1,25 +1,22 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+alice_march_log:
+  user: alice
+  date: 2026-03-01
+  weight: 70.5
+  body_fat_percentage: 22.5
+  waist: 75.0
+  notes: Monthly check-in
 
-one:
-  user: one
-  date: 2026-02-05
-  weight: 9.99
-  body_fat_percentage: 9.99
-  chest: 9.99
-  waist: 9.99
-  hips: 9.99
-  arms: 9.99
-  thighs: 9.99
-  notes: MyText
+alice_feb_log:
+  user: alice
+  date: 2026-02-01
+  weight: 71.2
+  body_fat_percentage: 23.1
+  waist: 76.0
+  notes: February baseline
 
-two:
-  user: two
-  date: 2026-02-05
-  weight: 9.99
-  body_fat_percentage: 9.99
-  chest: 9.99
-  waist: 9.99
-  hips: 9.99
-  arms: 9.99
-  thighs: 9.99
-  notes: MyText
+bob_march_log:
+  user: bob
+  date: 2026-03-01
+  weight: 80.0
+  body_fat_percentage: 15.0
+  notes: Steady bulk
