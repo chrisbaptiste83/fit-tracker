@@ -1311,3 +1311,720 @@ Processing by MealPlansController#index as HTML
 Completed 200 OK in 195ms (Views: 32.1ms | ActiveRecord: 8.9ms (4 queries, 0 cached) | GC: 83.7ms)
 
 
+Started GET "/" for 127.0.0.1 at 2026-02-25 07:24:09 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Fittrack'*/[0m
+Processing by DashboardController#index as HTML
+Redirected to http://127.0.0.1:3000/session/new
+Filter chain halted as :require_authentication rendered or redirected
+Completed 302 Found in 35ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/session/new" for 127.0.0.1 at 2026-02-25 07:24:10 -0700
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 14.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 22.8ms | GC: 0.0ms)
+Completed 200 OK in 72ms (Views: 30.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/session" for 127.0.0.1 at 2026-02-25 07:24:17 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token" => "[FILTERED]", "email_address" => "[FILTERED]", "password" => "[FILTERED]", "commit" => "Sign in"}
+[31mUnpermitted parameters: :authenticity_token, :commit. Context: { controller: SessionsController, action: create, request: #<ActionDispatch::Request:0x00007fd12fe406f8>, params: {"authenticity_token" => "[FILTERED]", "email_address" => "[FILTERED]", "password" => "[FILTERED]", "commit" => "Sign in", "controller" => "sessions", "action" => "create"} }[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email_address" = 'chrisbaptiste83@gmail.com' LIMIT 1 /*action='create',application='Fittrack',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:9:in 'SessionsController#create'
+Redirected to http://127.0.0.1:3000/session/new
+Completed 302 Found in 294ms (ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 12.4ms)
+
+
+Started GET "/session/new" for 127.0.0.1 at 2026-02-25 07:24:17 -0700
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.8ms | GC: 1.3ms)
+Completed 200 OK in 16ms (Views: 6.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.3ms)
+
+
+Unable to resolve 'image.svg' for missing asset 'image.svg' in tailwind.css
+Started GET "/registration/new" for 127.0.0.1 at 2026-02-25 07:24:22 -0700
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.html.erb within layouts/application
+  Rendered registrations/new.html.erb within layouts/application (Duration: 2.8ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.7ms | GC: 0.2ms)
+Completed 200 OK in 15ms (Views: 4.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/registration" for 127.0.0.1 at 2026-02-25 07:24:42 -0700
+Processing by RegistrationsController#create as HTML
+  Parameters: {"authenticity_token" => "[FILTERED]", "user" => {"email_address" => "[FILTERED]", "password" => "[FILTERED]", "password_confirmation" => "[FILTERED]"}, "commit" => "Create account"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='Fittrack',controller='registrations'*/[0m
+  ↳ app/controllers/registrations_controller.rb:11:in 'RegistrationsController#create'
+  [1m[36mUser Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email_address" = 'chrisbaptiste83@gmail.com' LIMIT 1 /*action='create',application='Fittrack',controller='registrations'*/[0m
+  ↳ app/controllers/registrations_controller.rb:11:in 'RegistrationsController#create'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email_address", "password_digest", "created_at", "updated_at", "height", "weight", "age", "gender", "fitness_goal", "activity_level", "daily_calorie_goal", "protein_goal", "carb_goal", "fat_goal") VALUES ('chrisbaptiste83@gmail.com', '$2a$12$9jJz983eWNuP8zL83OzKNukS28WXpv6UAKK.qGsuT1dV7hhCKYZU6', '2026-02-25 14:24:43.024851', '2026-02-25 14:24:43.024851', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL) RETURNING "id" /*action='create',application='Fittrack',controller='registrations'*/[0m
+  ↳ app/controllers/registrations_controller.rb:11:in 'RegistrationsController#create'
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='Fittrack',controller='registrations'*/[0m
+  ↳ app/controllers/registrations_controller.rb:11:in 'RegistrationsController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='Fittrack',controller='registrations'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:46:in 'Authentication#start_new_session_for'
+  [1m[36mSession Create (1.6ms)[0m  [1m[32mINSERT INTO "sessions" ("user_id", "ip_address", "user_agent", "created_at", "updated_at") VALUES (2, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '2026-02-25 14:24:43.063411', '2026-02-25 14:24:43.063411') RETURNING "id" /*action='create',application='Fittrack',controller='registrations'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:46:in 'Authentication#start_new_session_for'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='Fittrack',controller='registrations'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:46:in 'Authentication#start_new_session_for'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 290ms (ActiveRecord: 7.3ms (3 queries, 0 cached) | GC: 2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2026-02-25 07:24:43 -0700
+Processing by DashboardController#index as HTML
+  [1m[36mSession Load (0.1ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:33:in 'Authentication#find_session_by_cookie'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/models/current.rb:3:in 'Current#user'
+  [1m[36mMeal Load (0.1ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-25' /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/models/user.rb:73:in 'User#today_nutrition'
+  [1m[36mProgressLog Load (0.1ms)[0m  [1m[34mSELECT "progress_logs".* FROM "progress_logs" WHERE "progress_logs"."user_id" = 2 ORDER BY "progress_logs"."date" DESC LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/dashboard_controller.rb:7:in 'DashboardController#index'
+  [1m[36mMeal Load (0.1ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" BETWEEN '2026-02-18' AND '2026-02-25' /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/dashboard_controller.rb:13:in 'Enumerable#group_by'
+  [1m[36mWorkout Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) AS "count_all", "workouts"."scheduled_date" AS "workouts_scheduled_date" FROM "workouts" WHERE "workouts"."user_id" = 2 AND "workouts"."scheduled_date" BETWEEN '2026-02-18' AND '2026-02-25' AND "workouts"."completed_at" IS NOT NULL GROUP BY "workouts"."scheduled_date" /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/dashboard_controller.rb:20:in 'DashboardController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  [1m[36mWorkout Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "workouts" WHERE "workouts"."user_id" = 2 AND "workouts"."scheduled_date" = '2026-02-25' LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/views/dashboard/index.html.erb:71
+  [1m[36mGoal Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "goals" WHERE "goals"."user_id" = 2 AND "goals"."completed_at" IS NULL LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/views/dashboard/index.html.erb:107
+  [1m[36mWorkout Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "workouts" WHERE "workouts"."user_id" = 2 AND (scheduled_date >= '2026-02-25') LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/views/dashboard/index.html.erb:143
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 9.4ms | GC: 0.0ms)
+  Rendered layouts/_navigation.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layouts/_nav_links.html.erb (Duration: 1.2ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 2.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.0ms | GC: 0.0ms)
+Completed 200 OK in 79ms (Views: 14.3ms | ActiveRecord: 2.9ms (9 queries, 0 cached) | GC: 1.5ms)
+
+
+Started GET "/workouts" for 127.0.0.1 at 2026-02-25 07:24:49 -0700
+Processing by WorkoutsController#index as HTML
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='workouts'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:33:in 'Authentication#find_session_by_cookie'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='workouts'*/[0m
+  ↳ app/models/current.rb:3:in 'Current#user'
+  Rendering layout layouts/application.html.erb
+  Rendering workouts/index.html.erb within layouts/application
+  [1m[36mWorkout Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "workouts" WHERE "workouts"."user_id" = 2 AND (scheduled_date >= '2026-02-25') LIMIT 1 /*action='index',application='Fittrack',controller='workouts'*/[0m
+  ↳ app/views/workouts/index.html.erb:20
+  [1m[36mWorkout Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "workouts" WHERE "workouts"."user_id" = 2 AND (scheduled_date < '2026-02-25') LIMIT 1 /*action='index',application='Fittrack',controller='workouts'*/[0m
+  ↳ app/views/workouts/index.html.erb:48
+  Rendered workouts/index.html.erb within layouts/application (Duration: 4.9ms | GC: 0.0ms)
+  Rendered layouts/_navigation.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layouts/_nav_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.8ms | GC: 0.0ms)
+Completed 200 OK in 28ms (Views: 8.1ms | ActiveRecord: 0.6ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/workouts/new" for 127.0.0.1 at 2026-02-25 07:24:51 -0700
+Processing by WorkoutsController#new as HTML
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 2 LIMIT 1 /*action='new',application='Fittrack',controller='workouts'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:33:in 'Authentication#find_session_by_cookie'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='new',application='Fittrack',controller='workouts'*/[0m
+  ↳ app/models/current.rb:3:in 'Current#user'
+  Rendering layout layouts/application.html.erb
+  Rendering workouts/new.html.erb within layouts/application
+  Rendered workouts/_form.html.erb (Duration: 27.4ms | GC: 19.3ms)
+  Rendered workouts/new.html.erb within layouts/application (Duration: 28.4ms | GC: 19.3ms)
+  Rendered layouts/_navigation.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layouts/_nav_links.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 1.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 32.1ms | GC: 19.3ms)
+Completed 200 OK in 62ms (Views: 32.6ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 19.3ms)
+
+
+Started GET "/exercises" for 127.0.0.1 at 2026-02-25 07:24:54 -0700
+Processing by ExercisesController#index as HTML
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='exercises'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:33:in 'Authentication#find_session_by_cookie'
+  Rendering layout layouts/application.html.erb
+  Rendering exercises/index.html.erb within layouts/application
+  [1m[36mExercise Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "exercises" /*action='index',application='Fittrack',controller='exercises'*/[0m
+  ↳ app/views/exercises/index.html.erb:28
+  [1m[36mExercise Load (0.2ms)[0m  [1m[34mSELECT "exercises".* FROM "exercises" ORDER BY "exercises"."name" ASC /*action='index',application='Fittrack',controller='exercises'*/[0m
+  ↳ app/views/exercises/index.html.erb:36
+  Rendered exercises/index.html.erb within layouts/application (Duration: 9.1ms | GC: 0.6ms)
+  Rendered layouts/_navigation.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layouts/_nav_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.0ms | GC: 1.4ms)
+Completed 200 OK in 29ms (Views: 13.2ms | ActiveRecord: 0.7ms (3 queries, 0 cached) | GC: 1.4ms)
+
+
+Started GET "/nutrition" for 127.0.0.1 at 2026-02-25 07:24:55 -0700
+Processing by NutritionController#index as HTML
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='nutrition'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:33:in 'Authentication#find_session_by_cookie'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='nutrition'*/[0m
+  ↳ app/models/current.rb:3:in 'Current#user'
+  [1m[36mMeal Load (0.2ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-25' /*action='index',application='Fittrack',controller='nutrition'*/[0m
+  ↳ app/controllers/nutrition_controller.rb:7:in 'NutritionController#index'
+  [1m[36mMeal Load (0.1ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-19' /*action='index',application='Fittrack',controller='nutrition'*/[0m
+  ↳ app/controllers/nutrition_controller.rb:21:in 'block in NutritionController#index'
+  [1m[36mMeal Load (0.1ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-20' /*action='index',application='Fittrack',controller='nutrition'*/[0m
+  ↳ app/controllers/nutrition_controller.rb:21:in 'block in NutritionController#index'
+  [1m[36mMeal Load (0.1ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-21' /*action='index',application='Fittrack',controller='nutrition'*/[0m
+  ↳ app/controllers/nutrition_controller.rb:21:in 'block in NutritionController#index'
+  [1m[36mMeal Load (0.1ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-22' /*action='index',application='Fittrack',controller='nutrition'*/[0m
+  ↳ app/controllers/nutrition_controller.rb:21:in 'block in NutritionController#index'
+  [1m[36mMeal Load (0.2ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-23' /*action='index',application='Fittrack',controller='nutrition'*/[0m
+  ↳ app/controllers/nutrition_controller.rb:21:in 'block in NutritionController#index'
+  [1m[36mMeal Load (0.2ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-24' /*action='index',application='Fittrack',controller='nutrition'*/[0m
+  ↳ app/controllers/nutrition_controller.rb:21:in 'block in NutritionController#index'
+  [1m[36mCACHE Meal Load (0.0ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-25'[0m
+  ↳ app/controllers/nutrition_controller.rb:21:in 'block in NutritionController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering nutrition/index.html.erb within layouts/application
+  Rendered nutrition/index.html.erb within layouts/application (Duration: 2.0ms | GC: 0.0ms)
+  Rendered layouts/_navigation.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layouts/_nav_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.5ms | GC: 0.6ms)
+Completed 200 OK in 35ms (Views: 6.1ms | ActiveRecord: 1.2ms (10 queries, 1 cached) | GC: 2.2ms)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2026-02-25 07:24:56 -0700
+Processing by RecipesController#index as HTML
+  [1m[36mSession Load (0.1ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='recipes'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:33:in 'Authentication#find_session_by_cookie'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='recipes'*/[0m
+  ↳ app/models/current.rb:3:in 'Current#user'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/index.html.erb within layouts/application
+  [1m[36mRecipe Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "recipes" WHERE "recipes"."user_id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='recipes'*/[0m
+  ↳ app/views/recipes/index.html.erb:24
+  Rendered recipes/index.html.erb within layouts/application (Duration: 3.3ms | GC: 0.0ms)
+  Rendered layouts/_navigation.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layouts/_nav_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | GC: 0.0ms)
+Completed 200 OK in 30ms (Views: 8.6ms | ActiveRecord: 0.9ms (3 queries, 0 cached) | GC: 1.6ms)
+
+
+Started GET "/meal_plans" for 127.0.0.1 at 2026-02-25 07:24:57 -0700
+Processing by MealPlansController#index as HTML
+  [1m[36mSession Load (0.1ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='meal_plans'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:33:in 'Authentication#find_session_by_cookie'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='meal_plans'*/[0m
+  ↳ app/models/current.rb:3:in 'Current#user'
+  [1m[36mMealPlan Load (0.2ms)[0m  [1m[34mSELECT "meal_plans".* FROM "meal_plans" WHERE "meal_plans"."user_id" = 2 AND "meal_plans"."week_start_date" = '2026-02-23' ORDER BY "meal_plans"."id" ASC LIMIT 1 /*action='index',application='Fittrack',controller='meal_plans'*/[0m
+  ↳ app/controllers/meal_plans_controller.rb:6:in 'MealPlansController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering meal_plans/index.html.erb within layouts/application
+  [1m[36mMealPlan Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "meal_plans" WHERE "meal_plans"."user_id" = 2 AND (week_start_date >= '2026-02-23') LIMIT 1 /*action='index',application='Fittrack',controller='meal_plans'*/[0m
+  ↳ app/views/meal_plans/index.html.erb:26
+  Rendered meal_plans/index.html.erb within layouts/application (Duration: 2.7ms | GC: 0.0ms)
+  Rendered layouts/_navigation.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layouts/_nav_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.3ms | GC: 0.8ms)
+Completed 200 OK in 35ms (Views: 6.8ms | ActiveRecord: 1.1ms (4 queries, 0 cached) | GC: 1.6ms)
+
+
+Started GET "/progress" for 127.0.0.1 at 2026-02-25 07:24:59 -0700
+  
+ActionController::RoutingError (uninitialized constant ProgressLogsController)
+Caused by: ActionDispatch::MissingController (uninitialized constant ProgressLogsController)
+Caused by: NameError (uninitialized constant ProgressLogsController)
+
+Information for: ActionController::RoutingError (uninitialized constant ProgressLogsController):
+  
+
+Information for cause: ActionDispatch::MissingController (uninitialized constant ProgressLogsController):
+  
+actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+railties (8.0.4) lib/rails/engine/lazy_route_set.rb:60:in 'Rails::Engine::LazyRouteSet#call'
+rack (3.2.4) lib/rack/tempfile_reaper.rb:20:in 'Rack::TempfileReaper#call'
+rack (3.2.4) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+rack (3.2.4) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+rack (3.2.4) lib/rack/head.rb:15:in 'Rack::Head#call'
+actionpack (8.0.4) lib/action_dispatch/http/permissions_policy.rb:38:in 'ActionDispatch::PermissionsPolicy::Middleware#call'
+actionpack (8.0.4) lib/action_dispatch/http/content_security_policy.rb:38:in 'ActionDispatch::ContentSecurityPolicy::Middleware#call'
+rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+activerecord (8.0.4) lib/active_record/migration.rb:670:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.4) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.4) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in 'Propshaft::Server#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.2.0) lib/puma/configuration.rb:296:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.2.0) lib/puma/request.rb:103:in 'block in Puma::Request#handle_request'
+puma (7.2.0) lib/puma/thread_pool.rb:355:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.2.0) lib/puma/request.rb:102:in 'Puma::Request#handle_request'
+puma (7.2.0) lib/puma/server.rb:503:in 'Puma::Server#process_client'
+puma (7.2.0) lib/puma/server.rb:262:in 'block in Puma::Server#run'
+puma (7.2.0) lib/puma/thread_pool.rb:182:in 'block in Puma::ThreadPool#spawn_thread'
+
+Information for cause: NameError (uninitialized constant ProgressLogsController):
+  
+activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+railties (8.0.4) lib/rails/engine/lazy_route_set.rb:60:in 'Rails::Engine::LazyRouteSet#call'
+rack (3.2.4) lib/rack/tempfile_reaper.rb:20:in 'Rack::TempfileReaper#call'
+rack (3.2.4) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+rack (3.2.4) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+rack (3.2.4) lib/rack/head.rb:15:in 'Rack::Head#call'
+actionpack (8.0.4) lib/action_dispatch/http/permissions_policy.rb:38:in 'ActionDispatch::PermissionsPolicy::Middleware#call'
+actionpack (8.0.4) lib/action_dispatch/http/content_security_policy.rb:38:in 'ActionDispatch::ContentSecurityPolicy::Middleware#call'
+rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+activerecord (8.0.4) lib/active_record/migration.rb:670:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.4) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.4) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in 'Propshaft::Server#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.2.0) lib/puma/configuration.rb:296:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.2.0) lib/puma/request.rb:103:in 'block in Puma::Request#handle_request'
+puma (7.2.0) lib/puma/thread_pool.rb:355:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.2.0) lib/puma/request.rb:102:in 'Puma::Request#handle_request'
+puma (7.2.0) lib/puma/server.rb:503:in 'Puma::Server#process_client'
+puma (7.2.0) lib/puma/server.rb:262:in 'block in Puma::Server#run'
+puma (7.2.0) lib/puma/thread_pool.rb:182:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/progress" for 127.0.0.1 at 2026-02-25 07:25:02 -0700
+  
+ActionController::RoutingError (uninitialized constant ProgressLogsController)
+Caused by: ActionDispatch::MissingController (uninitialized constant ProgressLogsController)
+Caused by: NameError (uninitialized constant ProgressLogsController)
+
+Information for: ActionController::RoutingError (uninitialized constant ProgressLogsController):
+  
+
+Information for cause: ActionDispatch::MissingController (uninitialized constant ProgressLogsController):
+  
+actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+railties (8.0.4) lib/rails/engine/lazy_route_set.rb:60:in 'Rails::Engine::LazyRouteSet#call'
+rack (3.2.4) lib/rack/tempfile_reaper.rb:20:in 'Rack::TempfileReaper#call'
+rack (3.2.4) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+rack (3.2.4) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+rack (3.2.4) lib/rack/head.rb:15:in 'Rack::Head#call'
+actionpack (8.0.4) lib/action_dispatch/http/permissions_policy.rb:38:in 'ActionDispatch::PermissionsPolicy::Middleware#call'
+actionpack (8.0.4) lib/action_dispatch/http/content_security_policy.rb:38:in 'ActionDispatch::ContentSecurityPolicy::Middleware#call'
+rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+activerecord (8.0.4) lib/active_record/migration.rb:670:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.4) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.4) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in 'Propshaft::Server#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.2.0) lib/puma/configuration.rb:296:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.2.0) lib/puma/request.rb:103:in 'block in Puma::Request#handle_request'
+puma (7.2.0) lib/puma/thread_pool.rb:355:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.2.0) lib/puma/request.rb:102:in 'Puma::Request#handle_request'
+puma (7.2.0) lib/puma/server.rb:503:in 'Puma::Server#process_client'
+puma (7.2.0) lib/puma/server.rb:262:in 'block in Puma::Server#run'
+puma (7.2.0) lib/puma/thread_pool.rb:182:in 'block in Puma::ThreadPool#spawn_thread'
+
+Information for cause: NameError (uninitialized constant ProgressLogsController):
+  
+activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+railties (8.0.4) lib/rails/engine/lazy_route_set.rb:60:in 'Rails::Engine::LazyRouteSet#call'
+rack (3.2.4) lib/rack/tempfile_reaper.rb:20:in 'Rack::TempfileReaper#call'
+rack (3.2.4) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+rack (3.2.4) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+rack (3.2.4) lib/rack/head.rb:15:in 'Rack::Head#call'
+actionpack (8.0.4) lib/action_dispatch/http/permissions_policy.rb:38:in 'ActionDispatch::PermissionsPolicy::Middleware#call'
+actionpack (8.0.4) lib/action_dispatch/http/content_security_policy.rb:38:in 'ActionDispatch::ContentSecurityPolicy::Middleware#call'
+rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+activerecord (8.0.4) lib/active_record/migration.rb:670:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.4) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.4) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in 'Propshaft::Server#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.2.0) lib/puma/configuration.rb:296:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.2.0) lib/puma/request.rb:103:in 'block in Puma::Request#handle_request'
+puma (7.2.0) lib/puma/thread_pool.rb:355:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.2.0) lib/puma/request.rb:102:in 'Puma::Request#handle_request'
+puma (7.2.0) lib/puma/server.rb:503:in 'Puma::Server#process_client'
+puma (7.2.0) lib/puma/server.rb:262:in 'block in Puma::Server#run'
+puma (7.2.0) lib/puma/thread_pool.rb:182:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/meal_plans/new" for 127.0.0.1 at 2026-02-25 07:25:08 -0700
+Processing by MealPlansController#new as HTML
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 2 LIMIT 1 /*action='new',application='Fittrack',controller='meal_plans'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:33:in 'Authentication#find_session_by_cookie'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='new',application='Fittrack',controller='meal_plans'*/[0m
+  ↳ app/models/current.rb:3:in 'Current#user'
+  Rendering layout layouts/application.html.erb
+  Rendering meal_plans/new.html.erb within layouts/application
+  [1m[36mRecipe Load (0.2ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."user_id" = 2 ORDER BY "recipes"."name" ASC /*action='new',application='Fittrack',controller='meal_plans'*/[0m
+  ↳ app/views/meal_plans/_form.html.erb:27
+  Rendered meal_plans/_form.html.erb (Duration: 10.5ms | GC: 0.0ms)
+  Rendered meal_plans/new.html.erb within layouts/application (Duration: 11.3ms | GC: 0.0ms)
+  Rendered layouts/_navigation.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layouts/_nav_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.6ms | GC: 0.0ms)
+Completed 200 OK in 45ms (Views: 13.8ms | ActiveRecord: 0.9ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2026-02-25 07:25:14 -0700
+Processing by DashboardController#index as HTML
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:33:in 'Authentication#find_session_by_cookie'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/models/current.rb:3:in 'Current#user'
+  [1m[36mMeal Load (0.1ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-25' /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/models/user.rb:73:in 'User#today_nutrition'
+  [1m[36mProgressLog Load (0.2ms)[0m  [1m[34mSELECT "progress_logs".* FROM "progress_logs" WHERE "progress_logs"."user_id" = 2 ORDER BY "progress_logs"."date" DESC LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/dashboard_controller.rb:7:in 'DashboardController#index'
+  [1m[36mMeal Load (0.2ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" BETWEEN '2026-02-18' AND '2026-02-25' /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/dashboard_controller.rb:13:in 'Enumerable#group_by'
+  [1m[36mWorkout Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) AS "count_all", "workouts"."scheduled_date" AS "workouts_scheduled_date" FROM "workouts" WHERE "workouts"."user_id" = 2 AND "workouts"."scheduled_date" BETWEEN '2026-02-18' AND '2026-02-25' AND "workouts"."completed_at" IS NOT NULL GROUP BY "workouts"."scheduled_date" /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/dashboard_controller.rb:20:in 'DashboardController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  [1m[36mWorkout Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "workouts" WHERE "workouts"."user_id" = 2 AND "workouts"."scheduled_date" = '2026-02-25' LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/views/dashboard/index.html.erb:71
+  [1m[36mGoal Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "goals" WHERE "goals"."user_id" = 2 AND "goals"."completed_at" IS NULL LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/views/dashboard/index.html.erb:107
+  [1m[36mWorkout Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "workouts" WHERE "workouts"."user_id" = 2 AND (scheduled_date >= '2026-02-25') LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/views/dashboard/index.html.erb:143
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 5.8ms | GC: 0.0ms)
+  Rendered layouts/_navigation.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layouts/_nav_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.6ms | GC: 0.0ms)
+Completed 200 OK in 34ms (Views: 8.8ms | ActiveRecord: 1.5ms (9 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2026-02-25 07:25:21 -0700
+Processing by DashboardController#index as HTML
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/concerns/authentication.rb:33:in 'Authentication#find_session_by_cookie'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/models/current.rb:3:in 'Current#user'
+  [1m[36mMeal Load (0.2ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" = '2026-02-25' /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/models/user.rb:73:in 'User#today_nutrition'
+  [1m[36mProgressLog Load (0.2ms)[0m  [1m[34mSELECT "progress_logs".* FROM "progress_logs" WHERE "progress_logs"."user_id" = 2 ORDER BY "progress_logs"."date" DESC LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/dashboard_controller.rb:7:in 'DashboardController#index'
+  [1m[36mMeal Load (0.2ms)[0m  [1m[34mSELECT "meals".* FROM "meals" WHERE "meals"."user_id" = 2 AND "meals"."date" BETWEEN '2026-02-18' AND '2026-02-25' /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/dashboard_controller.rb:13:in 'Enumerable#group_by'
+  [1m[36mWorkout Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) AS "count_all", "workouts"."scheduled_date" AS "workouts_scheduled_date" FROM "workouts" WHERE "workouts"."user_id" = 2 AND "workouts"."scheduled_date" BETWEEN '2026-02-18' AND '2026-02-25' AND "workouts"."completed_at" IS NOT NULL GROUP BY "workouts"."scheduled_date" /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/controllers/dashboard_controller.rb:20:in 'DashboardController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  [1m[36mWorkout Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "workouts" WHERE "workouts"."user_id" = 2 AND "workouts"."scheduled_date" = '2026-02-25' LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/views/dashboard/index.html.erb:71
+  [1m[36mGoal Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "goals" WHERE "goals"."user_id" = 2 AND "goals"."completed_at" IS NULL LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/views/dashboard/index.html.erb:107
+  [1m[36mWorkout Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "workouts" WHERE "workouts"."user_id" = 2 AND (scheduled_date >= '2026-02-25') LIMIT 1 /*action='index',application='Fittrack',controller='dashboard'*/[0m
+  ↳ app/views/dashboard/index.html.erb:143
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 7.9ms | GC: 0.0ms)
+  Rendered layouts/_navigation.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layouts/_nav_links.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | GC: 0.0ms)
+Completed 200 OK in 34ms (Views: 10.8ms | ActiveRecord: 1.5ms (9 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Fittrack'*/[0m
+  [1m[35m (58.6ms)[0m  [1m[35mCREATE DATABASE "fit_tracker_development" ENCODING = 'unicode' /*application='Fittrack'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Fittrack'*/[0m
+  [1m[35m (52.8ms)[0m  [1m[35mCREATE DATABASE "fit_tracker_test" ENCODING = 'unicode' /*application='Fittrack'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_attachments" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_blobs" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "service_name" character varying NOT NULL, "byte_size" bigint NOT NULL, "checksum" character varying, "created_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key") /*application='Fittrack'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_variant_records" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" bigserial primary key, "blob_id" bigint NOT NULL, "variation_digest" character varying NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest") /*application='Fittrack'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "ai_conversations" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (47.5ms)[0m  [1m[35mCREATE TABLE "ai_conversations" ("id" bigserial primary key, "user_id" integer NOT NULL, "context" character varying, "messages" json, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE INDEX "index_ai_conversations_on_user_id" ON "ai_conversations" ("user_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "exercises" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "exercises" ("id" bigserial primary key, "name" character varying, "description" text, "category" character varying, "muscle_group" character varying, "equipment_needed" character varying, "difficulty" character varying, "calories_per_minute" decimal, "instructions" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "foods" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "foods" ("id" bigserial primary key, "name" character varying, "brand" character varying, "serving_size" decimal, "serving_unit" character varying, "calories" integer, "protein" decimal, "carbs" decimal, "fat" decimal, "fiber" decimal, "barcode" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "goals" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "goals" ("id" bigserial primary key, "user_id" integer NOT NULL, "goal_type" character varying, "target_value" decimal, "current_value" decimal, "unit" character varying, "start_date" date, "target_date" date, "completed_at" timestamp(6), "description" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_goals_on_user_id" ON "goals" ("user_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "meal_foods" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "meal_foods" ("id" bigserial primary key, "meal_id" integer NOT NULL, "food_id" integer NOT NULL, "servings" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_meal_foods_on_food_id" ON "meal_foods" ("food_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_meal_foods_on_meal_id" ON "meal_foods" ("meal_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "meal_plan_days" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "meal_plan_days" ("id" bigserial primary key, "meal_plan_id" integer NOT NULL, "day_of_week" integer, "breakfast_recipe_id" integer, "lunch_recipe_id" integer, "dinner_recipe_id" integer, "snacks" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_meal_plan_days_on_breakfast_recipe_id" ON "meal_plan_days" ("breakfast_recipe_id") /*application='Fittrack'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_meal_plan_days_on_dinner_recipe_id" ON "meal_plan_days" ("dinner_recipe_id") /*application='Fittrack'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_meal_plan_days_on_lunch_recipe_id" ON "meal_plan_days" ("lunch_recipe_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_meal_plan_days_on_meal_plan_id" ON "meal_plan_days" ("meal_plan_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "meal_plans" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "meal_plans" ("id" bigserial primary key, "user_id" integer NOT NULL, "week_start_date" date, "ai_generated" boolean, "notes" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_meal_plans_on_user_id" ON "meal_plans" ("user_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "meals" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "meals" ("id" bigserial primary key, "user_id" integer NOT NULL, "meal_type" character varying, "date" date, "notes" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_meals_on_user_id" ON "meals" ("user_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "progress_logs" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "progress_logs" ("id" bigserial primary key, "user_id" integer NOT NULL, "date" date, "weight" decimal, "body_fat_percentage" decimal, "chest" decimal, "waist" decimal, "hips" decimal, "arms" decimal, "thighs" decimal, "notes" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_progress_logs_on_user_id" ON "progress_logs" ("user_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "recipes" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "recipes" ("id" bigserial primary key, "user_id" integer NOT NULL, "name" character varying, "description" text, "instructions" text, "prep_time" integer, "cook_time" integer, "servings" integer, "calories" integer, "protein" decimal, "carbs" decimal, "fat" decimal, "image_url" character varying, "ai_generated" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_recipes_on_user_id" ON "recipes" ("user_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" bigserial primary key, "user_id" integer NOT NULL, "ip_address" character varying, "user_agent" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_user_id" ON "sessions" ("user_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email_address" character varying NOT NULL, "password_digest" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "height" decimal, "weight" decimal, "age" integer, "gender" character varying, "fitness_goal" character varying, "activity_level" character varying, "daily_calorie_goal" integer, "protein_goal" integer, "carb_goal" integer, "fat_goal" integer) /*application='Fittrack'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email_address" ON "users" ("email_address") /*application='Fittrack'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "workout_exercises" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "workout_exercises" ("id" bigserial primary key, "workout_id" integer NOT NULL, "exercise_id" integer NOT NULL, "sets" integer, "reps" integer, "weight" decimal, "duration_seconds" integer, "rest_seconds" integer, "order" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_workout_exercises_on_exercise_id" ON "workout_exercises" ("exercise_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_workout_exercises_on_workout_id" ON "workout_exercises" ("workout_id") /*application='Fittrack'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "workouts" CASCADE /*application='Fittrack'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "workouts" ("id" bigserial primary key, "user_id" integer NOT NULL, "name" character varying, "scheduled_date" date, "completed_at" timestamp(6), "duration_minutes" integer, "calories_burned" integer, "notes" text, "ai_generated" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_workouts_on_user_id" ON "workouts" ("user_id") /*application='Fittrack'*/[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "active_storage_attachments" ADD CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "active_storage_variant_records" ADD CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "ai_conversations" ADD CONSTRAINT "fk_rails_faada8ac9a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "goals" ADD CONSTRAINT "fk_rails_c5fd9c8a38"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "meal_foods" ADD CONSTRAINT "fk_rails_bf0dfd9c70"
+FOREIGN KEY ("food_id")
+  REFERENCES "foods" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "meal_foods" ADD CONSTRAINT "fk_rails_ff61c7db79"
+FOREIGN KEY ("meal_id")
+  REFERENCES "meals" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "meal_plan_days" ADD CONSTRAINT "fk_rails_3b3d38311a"
+FOREIGN KEY ("meal_plan_id")
+  REFERENCES "meal_plans" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "meal_plan_days" ADD CONSTRAINT "fk_rails_f45b8821fa"
+FOREIGN KEY ("breakfast_recipe_id")
+  REFERENCES "recipes" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "meal_plan_days" ADD CONSTRAINT "fk_rails_ad26ee4042"
+FOREIGN KEY ("dinner_recipe_id")
+  REFERENCES "recipes" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "meal_plan_days" ADD CONSTRAINT "fk_rails_c7ca5a64d5"
+FOREIGN KEY ("lunch_recipe_id")
+  REFERENCES "recipes" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "meal_plans" ADD CONSTRAINT "fk_rails_9a2cda78eb"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "meals" ADD CONSTRAINT "fk_rails_6819997d7c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "progress_logs" ADD CONSTRAINT "fk_rails_be6ca347c8"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "recipes" ADD CONSTRAINT "fk_rails_9606fce865"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_758836b4f0"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "workout_exercises" ADD CONSTRAINT "fk_rails_70ff0e3e09"
+FOREIGN KEY ("exercise_id")
+  REFERENCES "exercises" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "workout_exercises" ADD CONSTRAINT "fk_rails_acb3987b72"
+FOREIGN KEY ("workout_id")
+  REFERENCES "workouts" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "workouts" ADD CONSTRAINT "fk_rails_40b8fd8af6"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='Fittrack'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Fittrack'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20260314021543) /*application='Fittrack'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20260205071647),
+(20260205071641),
+(20260205071625),
+(20260205071619),
+(20260205071615),
+(20260205071609),
+(20260205071604),
+(20260205071429),
+(20260205071212),
+(20260205071207),
+(20260205071200),
+(20260205071154),
+(20260205071145),
+(20260205071043),
+(20260205071041); /*application='Fittrack'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-04-28 13:37:24.442341', '2026-04-28 13:37:24.442346') RETURNING "key" /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '0a0b9e3a3ad37f9f286997b062bfb2fc7cc31c57', '2026-04-28 13:37:24.447553', '2026-04-28 13:37:24.447557') RETURNING "key" /*application='Fittrack'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8443936577420407140) /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Fittrack'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(8443936577420407140) /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Fittrack'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8443936577420407140) /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Fittrack'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(8443936577420407140) /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Fittrack'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Fittrack'*/[0m

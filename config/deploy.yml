@@ -92,6 +92,7 @@ builder:
 
 accessories:
   postgres:
+    service: fit-tracker-postgres
     image: postgres:16
     host: 172.236.243.75
     env:
