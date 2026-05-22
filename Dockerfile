@@ -1,10 +1,13 @@
 # syntax=docker/dockerfile:1
 # check=error=true
 
-# This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t fittrack .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name fittrack fittrack
-
+# This Dockerfile is designed for production, not development.
+# Build and run by hand:
+#   docker build -t fittrack .
+#   docker run -d -p 8080:8080 --name fittrack fittrack
+# In production, secrets such as RAILS_MASTER_KEY are injected by the
+# deployment platform (Cloud Run or ECS) from its secret manager.
+#
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
@@ -68,5 +71,6 @@ USER 1000:1000
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start server via Thruster by default, this can be overwritten at runtime
-EXPOSE 80
+ENV PORT=8080
+EXPOSE ${PORT}
 CMD ["./bin/thrust", "./bin/rails", "server"]
