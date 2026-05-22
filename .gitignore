@@ -19,7 +19,7 @@
 /public/assets
 
 /config/master.key
-/config/credentials/production.key
+/config/credentials/*.key
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
@@ -27,6 +27,7 @@
 .env
 /.env*
 
-.kamal/secrets
+.kamal/
 
 .DS_Store
+.aider*
