@@ -24,8 +24,9 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 
+# Environment files (may contain secrets; never commit)
 .env
-/.env*
+.env.*
 
 .kamal/
 
