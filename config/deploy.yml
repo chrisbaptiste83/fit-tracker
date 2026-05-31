@@ -1,4 +1,0 @@
-# This file is removed as part of the migration from Kamal to the canonical
-# Fornax Stack CI/CD pipeline (GitHub Actions → Cloud Run).
-# Kamal configuration is no longer used. Deployment is handled by
-# .github/workflows/deploy.yml using OIDC and GCP Cloud Run.

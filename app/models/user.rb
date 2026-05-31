@@ -37,6 +37,13 @@ class User < ApplicationRecord
 
   validates :email_address, presence: true, uniqueness: true
 
+  # Password strength policy (A07 compliance)
+  validate :password_strength, if: -> { password.present? }
+
+  # Account lockout configuration (A07 compliance)
+  MAX_FAILED_ATTEMPTS = 5
+  LOCKOUT_DURATION = 30.minutes
+
   # Calculate BMR using Mifflin-St Jeor equation
   def bmr
     return nil unless weight && height && age && gender
@@ -85,5 +92,70 @@ class User < ApplicationRecord
   # Get today's workout summary
   def today_workouts
     workouts.where(scheduled_date: Date.current)
+  end
+
+  # Account lockout methods (A07 compliance)
+  def increment_failed_attempts!
+    new_attempts = failed_attempts.to_i + 1
+    updates = { failed_attempts: new_attempts }
+    updates[:locked_at] = Time.current if new_attempts >= MAX_FAILED_ATTEMPTS
+    update_columns(updates)
+  end
+
+  def lock_access!
+    update_column(:locked_at, Time.current)
+  end
+
+  def access_locked?
+    return false unless locked_at.present?
+
+    if locked_at < LOCKOUT_DURATION.ago
+      unlock_access!
+      return false
+    end
+
+    true
+  end
+
+  def unlock_access!
+    update_columns(failed_attempts: 0, locked_at: nil)
+  end
+
+  def self.authenticate_with_lockout(email_address, password)
+    user = find_by(email_address: email_address.to_s.strip.downcase)
+    return nil unless user
+
+    if user.access_locked?
+      user.errors.add(:base, "Account is temporarily locked due to too many failed attempts. Please try again later.")
+      return user
+    end
+
+    if user.authenticate(password)
+      user.unlock_access! if user.failed_attempts.to_i > 0
+      user
+    else
+      user.increment_failed_attempts!
+      nil
+    end
+  end
+
+  private
+
+  def password_strength
+    if password.length < 12
+      errors.add(:password, "must be at least 12 characters")
+    end
+    unless password.match?(/[A-Z]/)
+      errors.add(:password, "must include an uppercase letter")
+    end
+    unless password.match?(/[a-z]/)
+      errors.add(:password, "must include a lowercase letter")
+    end
+    unless password.match?(/\d/)
+      errors.add(:password, "must include a number")
+    end
+    unless password.match?(/[^A-Za-z0-9]/)
+      errors.add(:password, "must include a special character")
+    end
   end
 end

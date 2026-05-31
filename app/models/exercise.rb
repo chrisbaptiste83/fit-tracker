@@ -35,6 +35,6 @@ class Exercise < ApplicationRecord
   scope :by_difficulty, ->(level) { where(difficulty: level) }
 
   def self.search(query)
-    where("name LIKE ? OR description LIKE ?", "%#{query}%", "%#{query}%")
+    where("name ILIKE ? OR description ILIKE ?", "%#{query}%", "%#{query}%")
   end
 end

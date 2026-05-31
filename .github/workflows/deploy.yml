@@ -92,3 +92,9 @@ jobs:
           service: ${{ env.SERVICE }}
           region: ${{ env.GCP_REGION }}
           image: ${{ env.REGISTRY }}:${{ github.sha }}
+          secrets: |
+            DATABASE_URL=fit-tracker-database-url-prod:latest
+            SECRET_KEY_BASE=fit-tracker-secret-key-base-prod:latest
+            SMTP_USERNAME=fit-tracker-smtp-username-prod:latest
+            SMTP_PASSWORD=fit-tracker-smtp-password-prod:latest
+            RAILS_MASTER_KEY=fit-tracker-rails-master-key-prod:latest

@@ -4,25 +4,25 @@ class UserTest < ActiveSupport::TestCase
   # Validations
 
   test "valid user with required attributes" do
-    user = User.new(email_address: "newuser@example.com", password: "password")
+    user = User.new(email_address: "newuser@example.com", password: "StrongP@ss1234")
     assert user.valid?
   end
 
   test "invalid without email_address" do
-    user = User.new(password: "password")
+    user = User.new(password: "StrongP@ss1234")
     assert_not user.valid?
     assert_includes user.errors[:email_address], "can't be blank"
   end
 
   test "invalid with duplicate email_address" do
-    User.create!(email_address: "dupe@example.com", password: "password")
-    user = User.new(email_address: "dupe@example.com", password: "password")
+    User.create!(email_address: "dupe@example.com", password: "StrongP@ss1234")
+    user = User.new(email_address: "dupe@example.com", password: "StrongP@ss1234")
     assert_not user.valid?
     assert_includes user.errors[:email_address], "has already been taken"
   end
 
   test "normalizes email to lowercase and strips whitespace" do
-    user = User.create!(email_address: "  UPPER@EXAMPLE.COM  ", password: "password")
+    user = User.create!(email_address: "  UPPER@EXAMPLE.COM  ", password: "StrongP@ss1234")
     assert_equal "upper@example.com", user.email_address
   end
 
@@ -49,7 +49,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "destroying user cascades to workouts" do
-    user = User.create!(email_address: "cascade@example.com", password: "password")
+    user = User.create!(email_address: "cascade@example.com", password: "StrongP@ss1234")
     user.workouts.create!(name: "Test Workout", scheduled_date: Date.current)
     assert_difference "Workout.count", -1 do
       user.destroy
@@ -137,7 +137,7 @@ class UserTest < ActiveSupport::TestCase
   # today_nutrition
 
   test "today_nutrition returns zero hash for user with no meals today" do
-    user = User.create!(email_address: "empty@example.com", password: "password")
+    user = User.create!(email_address: "empty@example.com", password: "StrongP@ss1234")
     nutrition = user.today_nutrition
     assert_equal({ calories: 0, protein: 0, carbs: 0, fat: 0 }, nutrition)
   end

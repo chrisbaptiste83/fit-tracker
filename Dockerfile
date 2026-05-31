@@ -70,7 +70,7 @@ USER 1000:1000
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Start Puma directly (Cloud Run handles TLS termination and load balancing)
+# Start the server via Thruster (handles static files, compression, and request forwarding to Puma)
 ENV PORT=8080
 EXPOSE ${PORT}
-CMD ["./bin/rails", "server"]
+CMD ["bundle", "exec", "thrust", "./bin/rails", "server", "-b", "127.0.0.1", "-p", "3000"]
