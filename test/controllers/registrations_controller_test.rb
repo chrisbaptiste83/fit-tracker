@@ -21,8 +21,8 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post registration_path, params: {
         user: {
           email_address: "newuser@example.com",
-          password: "securepassword",
-          password_confirmation: "securepassword"
+          password: "StrongP@ss1234",
+          password_confirmation: "StrongP@ss1234"
         }
       }
     end
@@ -33,8 +33,8 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     post registration_path, params: {
       user: {
         email_address: "autologin@example.com",
-        password: "securepassword",
-        password_confirmation: "securepassword"
+        password: "StrongP@ss1234",
+        password_confirmation: "StrongP@ss1234"
       }
     }
     follow_redirect!
@@ -60,8 +60,8 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post registration_path, params: {
         user: {
           email_address: existing.email_address,
-          password: "password",
-          password_confirmation: "password"
+          password: "StrongP@ss1234",
+          password_confirmation: "StrongP@ss1234"
         }
       }
     end
@@ -71,7 +71,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "POST create with missing email renders new" do
     assert_no_difference "User.count" do
       post registration_path, params: {
-        user: { password: "password", password_confirmation: "password" }
+        user: { password: "StrongP@ss1234", password_confirmation: "StrongP@ss1234" }
       }
     end
     assert_response :unprocessable_entity

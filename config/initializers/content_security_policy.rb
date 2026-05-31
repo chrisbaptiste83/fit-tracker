@@ -11,8 +11,8 @@ Rails.application.configure do
     policy.img_src         :self, :https, :data
     policy.object_src      :none
     policy.script_src      :self
-    policy.style_src       :self
-    policy.connect_src     :self
+    policy.style_src       :self, :unsafe_inline
+    policy.connect_src     :self, "https://api.anthropic.com"
     policy.frame_ancestors :none
     policy.base_uri        :self
     policy.form_action     :self
