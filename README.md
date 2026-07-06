@@ -91,7 +91,7 @@ A full-stack fitness and nutrition tracking application built with Ruby on Rails
 | Caching | Solid Cache |
 | WebSockets | Solid Cable |
 | Web Server | Puma + Thruster |
-| Deployment | Kamal 2 + Docker |
+| Deployment | Google Cloud Run + Docker |
 | CI/CD | GitHub Actions |
 | Security Scan | Brakeman + RuboCop |
 | Testing | Rails MiniTest + Capybara + Selenium |
@@ -205,7 +205,7 @@ The suite uses **Rails MiniTest** with **fixtures**. Controller tests assert aut
 | `PGHOST` | PostgreSQL host | No (default: `localhost`) |
 | `DATABASE_URL` | Full PostgreSQL connection URL | Production |
 
-In production, secrets are injected via Kamal from `.kamal/secrets`. In development, store `ANTHROPIC_API_KEY` in `config/credentials.yml.enc`:
+In production, secrets are injected via GCP Secret Manager and Cloud Run environment variables. In development, store `ANTHROPIC_API_KEY` in `config/credentials.yml.enc`:
 
 ```bash
 bin/rails credentials:edit
@@ -216,24 +216,22 @@ bin/rails credentials:edit
 
 ## Deployment
 
-Deployed via **Kamal 2** to a single Docker host with an Nginx SSL proxy managed by Let's Encrypt.
+Deployed via **Google Cloud Run** (Docker + Thruster).
 
 ```bash
-kamal setup     # first-time server provisioning
-kamal deploy    # deploy a new version (zero-downtime)
-kamal app logs  # view application logs
-kamal console   # open Rails console on the server
+gcloud run deploy fit-tracker \
+  --image us-west1-docker.pkg.dev/PROJECT/REPO/fit-tracker:latest \
+  --region us-west1
+gcloud run services logs read fit-tracker --region us-west1
 ```
 
 **Infrastructure:**
 
 | Component | Detail |
 |---|---|
-| Server | `172.236.243.75` |
-| Domain | `fit-track.space` (SSL via Let's Encrypt) |
-| Docker image | `chrisbaptiste83/fit_tracker` (Docker Hub) |
-| Persistent volume | `fit_tracker_storage:/rails/storage` |
-| Architecture | `linux/amd64` |
+| Registry | Google Artifact Registry |
+| Storage | Google Cloud Storage (Active Storage) |
+| Secrets | GCP Secret Manager |
 
 ### CI/CD Pipeline
 
@@ -295,7 +293,6 @@ fit-tracker/
 │       └── layouts/
 ├── config/
 │   ├── routes.rb
-│   ├── deploy.yml                      # Kamal configuration
 │   └── database.yml
 ├── db/
 │   ├── schema.rb
