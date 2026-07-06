@@ -1,6 +1,10 @@
 class NutritionController < ApplicationController
   def index
-    @date = params[:date] ? Date.parse(params[:date]) : Date.current
+    @date = begin
+      params[:date].present? ? Date.parse(params[:date]) : Date.current
+    rescue Date::Error
+      Date.current
+    end
     @meals = current_user.meals.on_date(@date).includes(meal_foods: :food)
 
     @nutrition_totals = {
