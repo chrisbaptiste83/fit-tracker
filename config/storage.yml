@@ -12,5 +12,5 @@ local:
 # No long-lived service-account JSON keys are stored in ENV or the repo.
 google:
   service: GCS
-  project: fit-tracker
+  project: trinitas-forge
   bucket: fit-tracker-uploads-<%= Rails.env %>
