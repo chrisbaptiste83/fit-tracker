@@ -21,6 +21,6 @@ class Recipe < ApplicationRecord
   end
 
   def self.search(query)
-    where("name LIKE ? OR description LIKE ?", "%#{query}%", "%#{query}%")
+    where("name ILIKE ? OR description ILIKE ?", "%#{query}%", "%#{query}%")
   end
 end

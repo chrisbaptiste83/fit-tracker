@@ -9,7 +9,7 @@ class Food < ApplicationRecord
   scope :by_brand, ->(brand) { where(brand: brand) }
 
   def self.search(query)
-    where("name LIKE ? OR brand LIKE ?", "%#{query}%", "%#{query}%")
+    where("name ILIKE ? OR brand ILIKE ?", "%#{query}%", "%#{query}%")
   end
 
   def macros_summary
