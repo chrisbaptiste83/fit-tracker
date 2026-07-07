@@ -73,4 +73,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start the server via Thruster (handles static files, compression, and request forwarding to Puma)
 ENV PORT=8080
 EXPOSE ${PORT}
-CMD ["bundle", "exec", "thrust", "./bin/rails", "server", "-b", "127.0.0.1", "-p", "3000"]
+CMD ["./bin/thrust", "./bin/rails", "server"]
