@@ -42,6 +42,8 @@ gem "solid_queue"
 gem "solid_cable"
 
 # Reduces boot times through caching; required in config/boot.rb
+gem "google-cloud-storage", require: false
+
 gem "bootsnap", require: false
 
 group :development, :test do
