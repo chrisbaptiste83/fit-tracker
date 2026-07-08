@@ -96,10 +96,16 @@ class User < ApplicationRecord
 
   # Account lockout methods (A07 compliance)
   def increment_failed_attempts!
-    new_attempts = failed_attempts.to_i + 1
-    updates = { failed_attempts: new_attempts }
-    updates[:locked_at] = Time.current if new_attempts >= MAX_FAILED_ATTEMPTS
-    update_columns(updates)
+    # Atomic read-modify-write at the DB level. Doing this in Ruby
+    # (read failed_attempts, +1, write back) loses increments under
+    # concurrent failed logins, letting an attacker slip past the lockout
+    # threshold. Let the database serialize the increment instead.
+    self.class.where(id: id).update_all(
+      "failed_attempts = COALESCE(failed_attempts, 0) + 1, " \
+      "locked_at = CASE WHEN COALESCE(failed_attempts, 0) + 1 >= #{MAX_FAILED_ATTEMPTS} " \
+      "THEN CURRENT_TIMESTAMP ELSE locked_at END"
+    )
+    reload
   end
 
   def lock_access!

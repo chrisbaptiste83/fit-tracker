@@ -61,11 +61,16 @@ module Authentication
     def check_session_timeout
       return unless Current.session
 
-      if Current.session.updated_at < SESSION_TIMEOUT.ago
-        terminate_session
-        redirect_to new_session_path, alert: "Your session has expired. Please sign in again."
-      else
-        Current.session.touch
+      Session.transaction do
+        session = Session.lock.find_by(id: Current.session.id)
+        return unless session
+
+        if session.updated_at < SESSION_TIMEOUT.ago
+          terminate_session
+          redirect_to new_session_path, alert: "Your session has expired. Please sign in again."
+        else
+          session.touch
+        end
       end
     end
 end
