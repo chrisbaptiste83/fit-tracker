@@ -91,8 +91,8 @@ A full-stack fitness and nutrition tracking application built with Ruby on Rails
 | Caching | Solid Cache |
 | WebSockets | Solid Cable |
 | Web Server | Puma + Thruster |
-| Deployment | Google Cloud Run + Docker |
-| CI/CD | GitHub Actions |
+| Deployment | GCP Cloud Run via GitLab CI |
+| CI/CD | GitLab CI |
 | Security Scan | Brakeman + RuboCop |
 | Testing | Rails MiniTest + Capybara + Selenium |
 
@@ -216,22 +216,20 @@ bin/rails credentials:edit
 
 ## Deployment
 
-Deployed via **Google Cloud Run** (Docker + Thruster).
+Deployed via **GitLab CI** (`.gitlab-ci.yml`) to **GCP Cloud Run** (`trinitas-forge` project, `us-west1` region).
 
-```bash
-gcloud run deploy fit-tracker \
-  --image us-west1-docker.pkg.dev/PROJECT/REPO/fit-tracker:latest \
-  --region us-west1
-gcloud run services logs read fit-tracker --region us-west1
-```
+- Pushing to `main` triggers automated CI testing, image build to Google Artifact Registry, and zero-downtime Cloud Run deployment (`min-instances=1`).
+- Domain: `fit-track.space` / `fit-tracker-o3clvemm7a-uw.a.run.app`
 
 **Infrastructure:**
 
 | Component | Detail |
 |---|---|
-| Registry | Google Artifact Registry |
+| Platform | GCP Cloud Run (`us-west1`) |
+| Registry | Google Artifact Registry (`trinitas-forge`) |
 | Storage | Google Cloud Storage (Active Storage) |
 | Secrets | GCP Secret Manager |
+| Architecture | `linux/amd64` |
 
 ### CI/CD Pipeline
 
