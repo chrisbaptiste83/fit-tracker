@@ -48,7 +48,11 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
+
+# Fornax Stack Compliance: transactional mail and structured JSON logging
+gem "resend"
+gem "lograge"
 
 group :development, :test do
   # Pin minitest to 5.x — minitest 6 (bundled with Ruby 3.4) is incompatible with Rails 8 line filtering

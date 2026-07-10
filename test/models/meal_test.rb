@@ -40,7 +40,8 @@ class MealTest < ActiveSupport::TestCase
   end
 
   test "today scope returns meals for today" do
-    Meal.today.each { |m| assert_equal Date.current, m.date }
+    meal = Meal.create!(user: users(:one), meal_type: :lunch, date: Date.current)
+    assert_includes Meal.today, meal
   end
 
   # Nutrition calculations
