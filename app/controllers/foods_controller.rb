@@ -1,4 +1,6 @@
 class FoodsController < ApplicationController
+  before_action :require_admin, only: [:new, :create]
+
   def index
     @foods = Food.order(:name)
     @foods = @foods.search(params[:q]) if params[:q].present?
@@ -29,6 +31,10 @@ class FoodsController < ApplicationController
   end
 
   private
+
+  def require_admin
+    redirect_to foods_path, alert: "Not authorized." unless current_user&.admin?
+  end
 
   def food_params
     params.require(:food).permit(:name, :brand, :serving_size, :serving_unit, :calories, :protein, :carbs, :fat, :fiber, :barcode)

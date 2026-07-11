@@ -79,7 +79,7 @@ class ProgressLogTest < ActiveSupport::TestCase
   end
 
   test "bmi returns nil when user height is nil" do
-    user = User.create!(email_address: "noheight@example.com", password: "password")
+    user = User.create!(email_address: "noheight@example.com", password: "StrongP@ss1234")
     log = user.progress_logs.build(date: Date.current - 2.days, weight: 80.0)
     assert_nil log.bmi
   end

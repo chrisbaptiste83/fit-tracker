@@ -28,9 +28,9 @@ class NutritionControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET nutrition with user with no meals is still successful" do
-    fresh_user = User.create!(email_address: "fresh2@example.com", password: "password")
+    fresh_user = User.create!(email_address: "fresh2@example.com", password: "StrongP@ss1234")
     sign_out
-    sign_in(fresh_user)
+    sign_in(fresh_user, password: "StrongP@ss1234")
     get nutrition_path
     assert_response :success
   end

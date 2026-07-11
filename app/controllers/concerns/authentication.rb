@@ -1,14 +1,18 @@
 module Authentication
   extend ActiveSupport::Concern
 
+  SESSION_TIMEOUT = 30.minutes
+
   included do
     before_action :require_authentication
+    before_action :check_session_timeout, if: :authenticated?
     helper_method :authenticated?, :current_user
   end
 
   class_methods do
     def allow_unauthenticated_access(**options)
       skip_before_action :require_authentication, **options
+      skip_before_action :check_session_timeout, **options
     end
   end
 
@@ -52,5 +56,21 @@ module Authentication
     def terminate_session
       Current.session.destroy
       cookies.delete(:session_id)
+    end
+
+    def check_session_timeout
+      return unless Current.session
+
+      Session.transaction do
+        session = Session.lock.find_by(id: Current.session.id)
+        return unless session
+
+        if session.updated_at < SESSION_TIMEOUT.ago
+          terminate_session
+          redirect_to new_session_path, alert: "Your session has expired. Please sign in again."
+        else
+          session.touch
+        end
+      end
     end
 end

@@ -6,6 +6,12 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
+# Thruster >=0.1.2x reads HTTP_PORT for its own external bind address, not
+# PORT (a breaking change from older versions -- it otherwise defaults to
+# port 80, which Cloud Run never health-checks). Derive it from whatever
+# PORT the platform actually injected so this isn't hardcoded.
+export HTTP_PORT="${PORT:-8080}"
+
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare

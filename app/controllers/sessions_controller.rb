@@ -6,11 +6,16 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate_by(params.permit(:email_address, :password))
+    credentials = params.permit(:email_address, :password)
+    user = User.authenticate_with_lockout(credentials[:email_address], credentials[:password])
+
+    if user.nil?
+      redirect_to new_session_path, alert: "Try another email address or password."
+    elsif user.access_locked?
+      redirect_to new_session_path, alert: "Account is temporarily locked due to too many failed attempts. Please try again later."
+    else
       start_new_session_for user
       redirect_to after_authentication_url
-    else
-      redirect_to new_session_path, alert: "Try another email address or password."
     end
   end
 

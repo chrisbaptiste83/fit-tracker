@@ -29,8 +29,9 @@ module Ai
       }
 
       result = AiService.new(current_user).generate_workout(preferences)
+      return redirect_to workouts_path, alert: "Could not generate workout. Please try again." unless result[:success]
 
-      if result[:success]
+      ActiveRecord::Base.transaction do
         @workout = current_user.workouts.create!(
           name: result[:workout][:name],
           scheduled_date: Date.current,
@@ -40,23 +41,24 @@ module Ai
         )
 
         result[:workout][:exercises].each_with_index do |ex, index|
-          exercise = Exercise.find_by(name: ex[:name]) || Exercise.first
-          if exercise
-            @workout.workout_exercises.create!(
-              exercise: exercise,
-              sets: ex[:sets],
-              reps: ex[:reps],
-              duration_seconds: ex[:duration_seconds],
-              rest_seconds: ex[:rest_seconds],
-              order: index + 1
-            )
-          end
-        end
+          exercise = Exercise.find_by("LOWER(name) = ?", ex[:name].to_s.downcase)
+          next unless exercise # skip unknown; do NOT fabricate a substitute exercise
 
-        redirect_to @workout, notice: "AI generated your personalized workout!"
-      else
-        redirect_to workouts_path, alert: "Could not generate workout. Please try again."
+          @workout.workout_exercises.create!(
+            exercise: exercise,
+            sets: ex[:sets],
+            reps: ex[:reps],
+            duration_seconds: ex[:duration_seconds],
+            rest_seconds: ex[:rest_seconds],
+            order: index + 1
+          )
+        end
       end
+
+      redirect_to @workout, notice: "AI generated your personalized workout!"
+    rescue ActiveRecord::RecordInvalid => e
+      Rails.logger.error("AI workout generation failed: #{e.message}")
+      redirect_to workouts_path, alert: "Could not save workout. Please try again."
     end
 
     def suggest_meals

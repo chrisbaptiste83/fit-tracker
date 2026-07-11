@@ -10,9 +10,12 @@ class AiService
     response = call_claude(prompt, system: workout_system_prompt)
 
     parse_workout_response(response)
+  rescue JSON::ParserError => e
+    Rails.logger.error("AI Workout Parse Error: #{e.message}")
+    { success: false, error: "Received invalid data from AI." }
   rescue => e
-    Rails.logger.error("AI Workout Generation Error: #{e.message}")
-    { success: false, error: e.message }
+    Rails.logger.error("AI Workout Generation Error: #{e.class} - #{e.message}")
+    { success: false, error: "An unexpected error occurred. Please try again later." }
   end
 
   def suggest_meals(preferences)
@@ -21,8 +24,11 @@ class AiService
     response = call_claude(prompt, system: nutrition_system_prompt)
 
     parse_meal_suggestions(response)
+  rescue JSON::ParserError => e
+    Rails.logger.error("AI Meal Parse Error: #{e.message}")
+    []
   rescue => e
-    Rails.logger.error("AI Meal Suggestion Error: #{e.message}")
+    Rails.logger.error("AI Meal Suggestion Error: #{e.class} - #{e.message}")
     []
   end
 
@@ -35,9 +41,9 @@ class AiService
       analysis: response,
       generated_at: Time.current
     }
-  rescue => e
-    Rails.logger.error("AI Progress Analysis Error: #{e.message}")
-    { analysis: "Unable to analyze progress at this time.", error: e.message }
+  rescue StandardError => e
+    Rails.logger.error("AI Progress Analysis Error: #{e.class} - #{e.message}")
+    { analysis: "Unable to analyze progress at this time.", error: "An unexpected error occurred. Please try again." }
   end
 
   def chat(message, context)
@@ -48,8 +54,8 @@ class AiService
     end
 
     call_claude(message, system: system_prompt)
-  rescue => e
-    Rails.logger.error("AI Chat Error: #{e.message}")
+  rescue StandardError => e
+    Rails.logger.error("AI Chat Error: #{e.class} - #{e.message}")
     "I apologize, but I'm having trouble responding right now. Please try again."
   end
 
