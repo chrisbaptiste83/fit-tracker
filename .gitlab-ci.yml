@@ -47,17 +47,9 @@ build:
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
-  id_tokens:
-    GITLAB_ID_TOKEN:
-      aud: ${GCP_WORKLOAD_IDENTITY_PROVIDER}
   before_script:
     - apt-get update -qq && apt-get install -y docker.io
-    - echo "$GITLAB_ID_TOKEN" > /tmp/oidc-token
-    - gcloud iam workload-identity-pools create-cred-config ${GCP_WORKLOAD_IDENTITY_PROVIDER}
-      --output-file=/tmp/cred-config.json
-      --credential-source-file=/tmp/oidc-token
-      --credential-source-type=text
-    - gcloud auth login --cred-file=/tmp/cred-config.json
+    - gcloud auth activate-service-account --key-file="$GCP_SA_KEY"
     - gcloud auth configure-docker us-west1-docker.pkg.dev --quiet
     - gcloud config set project $PROJECT_ID
   script:
@@ -73,16 +65,8 @@ build:
 deploy:
   stage: deploy
   image: google/cloud-sdk:slim
-  id_tokens:
-    GITLAB_ID_TOKEN:
-      aud: ${GCP_WORKLOAD_IDENTITY_PROVIDER}
   before_script:
-    - echo "$GITLAB_ID_TOKEN" > /tmp/oidc-token
-    - gcloud iam workload-identity-pools create-cred-config ${GCP_WORKLOAD_IDENTITY_PROVIDER}
-      --output-file=/tmp/cred-config.json
-      --credential-source-file=/tmp/oidc-token
-      --credential-source-type=text
-    - gcloud auth login --cred-file=/tmp/cred-config.json
+    - gcloud auth activate-service-account --key-file="$GCP_SA_KEY"
     - gcloud config set project $PROJECT_ID
   script:
     - |
